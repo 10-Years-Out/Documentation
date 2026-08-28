@@ -1,0 +1,213 @@
+---
+title: "Extreme 5320-48P-8XE Managed POE Switch Configuration"
+description: "Client Service Standard, revision 1.2."
+icon: "network-wired"
+---
+
+import { PrintRecordButton } from "/snippets/print-record-button.jsx";
+
+| Client Service Standard | {{client-name}} |
+| :--- | ---: |
+
+<PrintRecordButton />
+
+| Document information | Value |
+| --- | --- |
+| Title | Extreme 5320-48P-8XE Managed POE Switch Configuration |
+| Revision | 1.2 |
+| Effective date | August 20, 2026 |
+| Updated date | August 28, 2026 |
+| Client | {{client-name}} |
+| Site | {{site-name}} |
+| Status | Demonstration |
+
+## Purpose
+
+Use this standard to configure an Extreme 5320-48P-8XE Managed POE switch for the client. It covers initial setup, management access, time, VLANs, ports, monitoring, labels, configuration backup, MFA access, validation, and documentation updates.
+
+<Warning>
+  This branch contains demonstration values. Confirm each value against the client overview and current network records before you use a command on a switch.
+</Warning>
+
+## Definitions
+
+| Definition | Value |
+| --- | --- |
+| Client | {{client-name}} |
+| Location | {{site-name}} — {{network-location}} |
+| Switch role | {{switch-role}} |
+| Switch model | {{switch-model}} |
+| System name | {{switch-system-name}} |
+| Management address | {{switch-management-cidr}} |
+| Default gateway | {{switch-default-gateway}} |
+| NTP server | {{ntp-server}} |
+| Syslog collector | {{syslog-collector}} |
+| Monitoring design | {{switch-monitoring-design}} |
+| Configuration backup | {{switch-backup-method}} |
+| Support account | {{support-account}} |
+| Password source | Refer to Technical Overview |
+
+### VLAN and port definitions
+
+| VLAN | Name | Untagged ports | Tagged ports | Purpose |
+| ---: | --- | --- | --- | --- |
+| 1 | Default | 1-4, 17-46 | 48 | Unused or staging ports |
+| 11 | WLAN-MGMT | 5-8 | 47-48 | Wireless management |
+| 20 | VOICE | 9-12 | 47-48 | Voice endpoints |
+| 30 | NVR | 13-16 | 47-48 | Video systems |
+| 40 | CORE | None | 47-48 | Core transit |
+
+## Procedure
+
+1. Confirm the approved client values and network design.
+2. Register the switch and confirm the required firmware.
+3. Complete the initial console setup.
+4. Configure management, secure access, time, VLANs, and ports.
+5. Configure the applicable monitoring and backup services.
+6. Label the switch and cables.
+7. Validate the configuration and record evidence.
+8. Update the client overview, network diagram, port map, and implementation record.
+
+## Work Instruction
+
+### 1. Confirm the source records
+
+Review the client overview, IP address list, LAN-WAN diagram, switch port map, rack diagram, BankXDR design, and change approval. Stop if an address is in use or if two sources give different values.
+
+### 2. Register the switch and confirm firmware
+
+Sign in to the Extreme support portal with the account in Definitions. Register the serial number. Confirm support coverage and the approved Switch Engine firmware path.
+
+### 3. Complete initial console setup
+
+Connect by serial console. Press **Enter** to start the setup sequence.
+
+1. Select Switch Engine unless the approved design requires Fabric Engine.
+2. Keep MSTP disabled unless the network design requires it.
+3. Enable enhanced security mode.
+4. Create the approved administrative and failsafe accounts. Refer to the password source in Definitions.
+5. Permit the failsafe account for network access only when the support standard requires it.
+
+```bash Failsafe account
+configure failsafe-account permit all
+save config
+```
+
+Restart the switch and sign in with the approved administrative account.
+
+### 4. Configure management and secure access
+
+Run the following commands with the values in Definitions.
+
+```bash Management and secure access
+disable dhcp vlan default
+configure vlan default ipaddress {{switch-management-cidr}}
+configure iproute add default {{switch-default-gateway}} vr VR-Default
+configure snmp sysName {{switch-system-name}}
+enable ssh2
+configure ssh2 secure-mode on
+save config
+```
+
+Reconnect by SSH to the management address in Definitions. Confirm that the prompt shows the defined system name.
+
+### 5. Configure time
+
+```bash Time
+enable ntp
+configure ntp server add {{ntp-server}}
+configure timezone name EST -300 autodst name EDT begins every second sunday march at 2 00 ends every first sunday november at 2 00
+configure ntp local-clock none
+save config
+```
+
+### 6. Configure VLANs and ports
+
+Create each VLAN in the VLAN and port definitions table. Add the listed access ports as untagged and the listed uplink ports as tagged. Do not create a VLAN that the approved client design excludes.
+
+```bash VLANs and ports
+create vlan WLAN-MGMT tag 11
+configure vlan WLAN-MGMT add ports 5-8 untagged
+configure vlan WLAN-MGMT add ports 47-48 tagged
+
+create vlan VOICE tag 20
+configure vlan VOICE add ports 9-12 untagged
+configure vlan VOICE add ports 47-48 tagged
+
+create vlan NVR tag 30
+configure vlan NVR add ports 13-16 untagged
+configure vlan NVR add ports 47-48 tagged
+
+create vlan CORE tag 40
+configure vlan CORE add ports 47-48 tagged
+save config
+```
+
+Add a clear description to each connected port. Use the device or circuit name. Keep the first character alphanumeric.
+
+```bash Port description example
+configure ports 1 description-string "RTR-NORTH-01 GE0/0/0"
+save config
+```
+
+### 7. Configure monitoring
+
+**Applicable path:** {{switch-monitoring-design}}
+
+This switch uses standalone XDR monitoring. Configure direct syslog forwarding to the collector in Definitions.
+
+```bash Syslog
+configure syslog add {{syslog-collector}} vr VR-Default local0
+enable syslog
+save config
+```
+
+Enable node alias for operational visibility.
+
+```bash Node alias
+enable nodealias ports all
+save config
+```
+
+### 8. Configure backup and administrative access
+
+Add the switch to the backup method in Definitions. Run a backup and confirm that the job completes. Configure RADIUS MFA for normal administrative access when MFA is enabled in the client overview. Keep the approved local failsafe account for recovery.
+
+### 9. Label the switch
+
+Apply labels for the system name, management address, port groups, uplinks, and connected devices. The following images show the label placement used by the source template. They do not show the Extreme 5320 model.
+
+<Frame caption="Front-panel label placement example; the pictured switch is not the 5320 model.">
+  <img src="/images/switch/front-panel-label-example.png" alt="Example of front-panel labels on a switch" />
+</Frame>
+
+<Frame caption="Port-group label placement example; the pictured switch is not the 5320 model.">
+  <img src="/images/switch/port-group-label-example.png" alt="Example of port-group labels on a switch" />
+</Frame>
+
+### 10. Validate and document the implementation
+
+Record the result and evidence reference for each check.
+
+| Check | Result | Evidence reference |
+| --- | --- | --- |
+| System name and installed asset match Definitions |  |  |
+| Management address, prefix, and default route are correct |  |  |
+| SSH secure mode works |  |  |
+| NTP is synchronized |  |  |
+| VLANs and port assignments match the approved port map |  |  |
+| Monitoring event reaches the approved destination |  |  |
+| Configuration is saved |  |  |
+| Configuration backup completes |  |  |
+| Labels are installed |  |  |
+| Client overview, diagrams, and port map are updated |  |  |
+
+Attach or reference the final running configuration. Complete the [switch configuration record](/deliverables/switch-configuration-record) for the client file and audit package.
+
+## Revision log
+
+| Revision | Effective date | Description | Author |
+| ---: | --- | --- | --- |
+| 1.0 | July 16, 2025 | Initial release. | CBC |
+| 1.1 | August 12, 2026 | Updated setup, security, monitoring, and backup instructions. | CBC |
+| 1.2 | August 20, 2026 | Updated Extreme 5320 switch configuration standard. | CBC |

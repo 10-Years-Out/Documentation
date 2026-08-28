@@ -1,102 +1,55 @@
 ---
-title: "Demo Bank overview"
-description: "The client source of truth for sites, services, installed switches, and reusable network definitions."
-icon: "building-shield"
+title: "Network and switch overview"
+description: "The client source for shared network services and installed switch records."
+icon: "building"
 ---
 
-import { profile } from "/snippets/switch-profile.mdx";
+| Client Documentation | {{client-name}} |
+| :--- | ---: |
 
-This page presents the client definitions used by the implementation standards. The editable source is one reusable profile, `/snippets/switch-profile.mdx`. Other pages import the switch by its stable role, `northAccess1`, instead of copying the hostname, address, serial number, or monitoring choice.
+| Document | Revision | Updated | Status |
+| --- | ---: | --- | --- |
+| Network and switch overview | 1.0 | August 28, 2026 | Demonstration |
 
-<Info>
-  Every value on this page is demonstration data. A production client overview must come from controlled client records and must not expose secrets.
-</Info>
+## Purpose
 
-## Client services
+This document identifies the shared services and installed switch used by the client network. Implementation standards refer to this record instead of repeating client values.
 
-<Columns cols={3}>
-  <Card title="Time" icon="clock">
-    **NTP server**
+## Definitions
 
-    <code>{profile.services.ntpServer}</code>
-  </Card>
-  <Card title="Monitoring" icon="satellite-dish">
-    **Syslog collector**
+| Definition | Value |
+| --- | --- |
+| Client | {{client-name}} |
+| Site | {{site-name}} |
+| Site code | {{site-code}} |
+| Network location | {{network-location}} |
+| NTP server | {{ntp-server}} |
+| Syslog collector | {{syslog-collector}} |
+| Configuration backup host | {{backup-host}} |
 
-    <code>{profile.services.syslogCollector}</code>
-  </Card>
-  <Card title="Configuration backup" icon="floppy-disk">
-    **Backup host**
+## Installed switch
 
-    <code>{profile.services.backupHost}</code>
-  </Card>
-</Columns>
+| Field | Recorded value |
+| --- | --- |
+| Stable device reference | {{switch-reference}} |
+| Role | {{switch-role}} |
+| Manufacturer and model | {{switch-model}} |
+| System name | {{switch-system-name}} |
+| Management address | {{switch-management-cidr}} |
+| Default gateway | {{switch-default-gateway}} |
+| Serial number | {{switch-serial-number}} |
+| MAC address | {{switch-mac-address}} |
+| Physical location | {{network-location}} |
+| Monitoring | {{switch-monitoring-design}} |
+| Configuration backup | {{switch-backup-method}} |
+| MFA administrative access | {{switch-mfa-status}} |
 
-## Installed switch inventory
+## Replacement control
 
-<Columns cols={2}>
-  <Card title="Stable role" icon="link">
-    **Reference key:** `northAccess1`
+The stable device reference is `{{switch-reference}}`. Keep this reference when the physical switch is replaced. Update its values once in the `variables` section of `docs.json`. Mintlify then updates every reference in the implementation standard and configuration record.
 
-    **Purpose:** {profile.switch.role}
+## Revision log
 
-    Standards keep this reference when the physical switch changes.
-  </Card>
-  <Card title="Installed asset" icon="network-wired">
-    **System name:** <code>{profile.switch.systemName}</code>
-
-    **Model:** {profile.switch.model}
-
-    **Serial:** <code>{profile.switch.asset.serialNumber}</code>
-
-    **Location:** {profile.switch.asset.location}
-  </Card>
-  <Card title="Management" icon="route">
-    **Address:** <code>{profile.switch.management.address}/{profile.switch.management.prefixLength}</code>
-
-    **Gateway:** <code>{profile.switch.management.gateway}</code>
-  </Card>
-  <Card title="Operating choices" icon="sliders">
-    **Monitoring:** {profile.switch.monitoring.mode === "standalone-xdr" ? "Standalone XDR" : "NAC-managed"}
-
-    **Backup:** {profile.switch.backup.method}
-
-    **MFA:** {profile.switch.security.mfaEnabled ? "Enabled" : "Not enabled"}
-  </Card>
-</Columns>
-
-## What happens when a switch is replaced
-
-<Steps>
-  <Step title="Keep the logical role">
-    Leave `northAccess1` in place so procedures and cross-references still point to the branch access-switch role.
-  </Step>
-  <Step title="Replace the installed-asset fields">
-    Update the model, system name when required, management assignment, serial number, MAC address, location, monitoring path, and backup method from the approved records.
-  </Step>
-  <Step title="Rebuild and review">
-    Mintlify rebuilds every page that imports `profile`. Review the generated commands, implementation pages, inventory, and validation evidence in one preview deployment.
-  </Step>
-</Steps>
-
-<Check>
-  The replacement is documented consistently when this overview, the configuration builder, the switch standard, and the client records all show the same installed asset.
-</Check>
-
-## Authoring contract
-
-```jsx snippets/switch-profile.mdx
-export const profile = {
-  services: { ntpServer: "192.0.2.20" },
-  switch: {
-    key: "northAccess1",
-    role: "North Branch primary access switch",
-    systemName: "5320-48P-8XE-NORTH-01",
-    management: { address: "192.0.2.10", prefixLength: "24" }
-  }
-};
-```
-
-<Card title="See the switch standard consume this overview" icon="arrow-right" href="/switch/overview">
-  Open the implementation standard that imports the same `profile` definition.
-</Card>
+| Revision | Date | Description | Author |
+| ---: | --- | --- | --- |
+| 1.0 | August 28, 2026 | Initial demonstration record. | CBC |

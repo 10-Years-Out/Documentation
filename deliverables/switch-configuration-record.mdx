@@ -1,137 +1,129 @@
 ---
 title: "Switch configuration record"
-description: "A print-ready client deliverable that records the installed switch and its exact approved configuration."
-icon: "file-certificate"
-mode: "wide"
+description: "Client and audit record for the installed Extreme 5320 switch."
+icon: "file-lines"
 ---
 
-import { profile } from "/snippets/switch-profile.mdx";
 import { PrintRecordButton } from "/snippets/print-record-button.jsx";
 
-<div className="audit-record-lead">
-  This record identifies the installed switch, its approved configuration, and the evidence required to show how the device was implemented.
-</div>
+| Client Configuration Record | {{client-name}} |
+| :--- | ---: |
 
 <PrintRecordButton />
 
-<Info>
-  This prototype contains demonstration data. Replace the validation status and evidence references with completed implementation records before you give the record to an auditor.
-</Info>
-
-## Document control
-
-| Field | Value |
+| Document information | Value |
 | --- | --- |
-| Client | {profile.clientAlias} |
-| Deliverable | Extreme 5320 switch configuration record |
-| Device role | {profile.switch.role} |
-| Record revision | Demo 1.0 |
+| Title | Extreme 5320 switch configuration record |
+| Revision | 1.0 |
 | Issued | August 28, 2026 |
-| Classification | {profile.dataClassification} |
-| Definition source | `snippets/switch-profile.mdx → profile.switch` |
+| Client | {{client-name}} |
+| Site | {{site-name}} |
+| Status | Demonstration — evidence not complete |
 
-## Installed asset
+## Purpose
+
+This record identifies the installed switch and the configuration applied under the [Extreme 5320 switch standard](/switch/5320-configuration). Keep it with the final running configuration, validation output, diagrams, and implementation approval.
+
+## Installed switch
 
 | Field | Recorded value |
 | --- | --- |
-| Logical role | `northAccess1` |
-| Model | {profile.switch.model} |
-| System name | <code>{profile.switch.systemName}</code> |
-| Serial number | <code>{profile.switch.asset.serialNumber}</code> |
-| MAC address | <code>{profile.switch.asset.macAddress}</code> |
-| Site | {profile.site.name} |
-| Physical location | {profile.switch.asset.location} |
+| Device reference | {{switch-reference}} |
+| Role | {{switch-role}} |
+| Manufacturer and model | {{switch-model}} |
+| System name | {{switch-system-name}} |
+| Serial number | {{switch-serial-number}} |
+| MAC address | {{switch-mac-address}} |
+| Physical location | {{network-location}} |
 
-## Management and shared services
+## Approved configuration
 
-| Setting | Exact value |
+| Setting | Recorded value |
 | --- | --- |
-| Management address | <code>{profile.switch.management.address}/{profile.switch.management.prefixLength}</code> |
-| Default gateway | <code>{profile.switch.management.gateway}</code> |
-| NTP server | <code>{profile.services.ntpServer}</code> |
-| Syslog collector | <code>{profile.switch.monitoring.collector}</code> |
-| Monitoring design | {profile.switch.monitoring.mode === "standalone-xdr" ? "Standalone switch XDR" : "NAC-managed"} |
-| Backup method | {profile.switch.backup.method} |
-| MFA | {profile.switch.security.mfaEnabled ? "Enabled" : "Not enabled"} |
+| Management address | {{switch-management-cidr}} |
+| Default gateway | {{switch-default-gateway}} |
+| NTP server | {{ntp-server}} |
+| Syslog collector | {{syslog-collector}} |
+| Monitoring | {{switch-monitoring-design}} |
+| Configuration backup | {{switch-backup-method}} |
+| MFA administrative access | {{switch-mfa-status}} |
 
-## VLAN and port plan
+### VLAN and port configuration
 
 | VLAN | Name | Untagged ports | Tagged ports | Purpose |
 | ---: | --- | --- | --- | --- |
-| {profile.vlans[0].id} | <code>{profile.vlans[0].name}</code> | <code>{profile.vlans[0].untagged}</code> | <code>{profile.vlans[0].tagged}</code> | {profile.vlans[0].purpose} |
-| {profile.vlans[1].id} | <code>{profile.vlans[1].name}</code> | <code>{profile.vlans[1].untagged}</code> | <code>{profile.vlans[1].tagged}</code> | {profile.vlans[1].purpose} |
-| {profile.vlans[2].id} | <code>{profile.vlans[2].name}</code> | <code>{profile.vlans[2].untagged}</code> | <code>{profile.vlans[2].tagged}</code> | {profile.vlans[2].purpose} |
-| {profile.vlans[3].id} | <code>{profile.vlans[3].name}</code> | <code>{profile.vlans[3].untagged}</code> | <code>{profile.vlans[3].tagged}</code> | {profile.vlans[3].purpose} |
-| {profile.vlans[4].id} | <code>{profile.vlans[4].name}</code> | <code>{profile.vlans[4].untagged}</code> | <code>{profile.vlans[4].tagged}</code> | {profile.vlans[4].purpose} |
+| 1 | Default | 1-4, 17-46 | 48 | Unused or staging ports |
+| 11 | WLAN-MGMT | 5-8 | 47-48 | Wireless management |
+| 20 | VOICE | 9-12 | 47-48 | Voice endpoints |
+| 30 | NVR | 13-16 | 47-48 | Video systems |
+| 40 | CORE | None | 47-48 | Core transit |
 
-<div className="audit-page-break" />
+<div className="document-page-break" />
 
-## Exact configuration baseline
+## Configuration baseline
 
-The following block is generated from the client overview. It records the baseline that the implementation procedure applies.
+This baseline uses the same global Mintlify variables as the implementation standard.
 
-<pre className="audit-config"><code>{`# Identity and management
+```bash Applied configuration baseline
 disable dhcp vlan default
-configure vlan default ipaddress ${profile.switch.management.address}/${profile.switch.management.prefixLength}
-configure iproute add default ${profile.switch.management.gateway} vr VR-Default
-configure snmp sysName ${profile.switch.systemName}
-
-# Secure access
+configure vlan default ipaddress {{switch-management-cidr}}
+configure iproute add default {{switch-default-gateway}} vr VR-Default
+configure snmp sysName {{switch-system-name}}
 enable ssh2
 configure ssh2 secure-mode on
 
-# Time
 enable ntp
-configure ntp server add ${profile.services.ntpServer}
+configure ntp server add {{ntp-server}}
+configure timezone name EST -300 autodst name EDT begins every second sunday march at 2 00 ends every first sunday november at 2 00
 configure ntp local-clock none
 
-# VLANs
-${profile.vlans.slice(1).map((vlan) => `create vlan ${vlan.name} tag ${vlan.id}`).join("\n")}
+create vlan WLAN-MGMT tag 11
+configure vlan WLAN-MGMT add ports 5-8 untagged
+configure vlan WLAN-MGMT add ports 47-48 tagged
 
-# Monitoring
-${profile.switch.monitoring.mode === "standalone-xdr" ? `configure syslog add ${profile.switch.monitoring.collector} vr VR-Default local0\nenable syslog` : "# Monitoring is managed through NAC; follow the NAC onboarding record."}
+create vlan VOICE tag 20
+configure vlan VOICE add ports 9-12 untagged
+configure vlan VOICE add ports 47-48 tagged
 
-# Operational data and persistence
+create vlan NVR tag 30
+configure vlan NVR add ports 13-16 untagged
+configure vlan NVR add ports 47-48 tagged
+
+create vlan CORE tag 40
+configure vlan CORE add ports 47-48 tagged
+
+configure syslog add {{syslog-collector}} vr VR-Default local0
+enable syslog
 enable nodealias ports all
-save config`}</code></pre>
+save config
+```
 
-<Warning>
-  This baseline does not replace a captured running configuration. Attach or reference the final device backup when the auditor needs byte-for-byte evidence of the complete configuration.
-</Warning>
+The final running configuration is the authoritative record of the device. Attach it or enter its controlled file reference below.
 
-## Control implementation
+| Evidence item | File, ticket, or approval reference |
+| --- | --- |
+| Final running configuration |  |
+| Successful configuration backup |  |
+| `show vlan` output |  |
+| `show ntp` output |  |
+| Monitoring test event |  |
+| Installation and label photographs |  |
+| Updated network diagram and port map |  |
 
-| Control | Required state | Recorded evidence |
-| --- | --- | --- |
-| Administrative access | SSHv2 secure mode; approved admin and failsafe accounts | Final `show configuration` capture |
-| MFA | {profile.switch.security.mfaEnabled ? "RADIUS MFA enabled for normal administrative access" : "Local access per approved design"} | Successful access test and authentication log |
-| Monitoring | {profile.switch.monitoring.mode === "standalone-xdr" ? "Direct syslog to the defined collector" : "NAC onboarding and event forwarding"} | Test event and collector receipt time |
-| Time | Approved NTP server and timezone | `show ntp` output |
-| Backup | {profile.switch.backup.method} | Backup job or file name and completion time |
-| Physical identification | System name, management address, and port-group labels | Installation photographs or field verification |
+## Validation
 
-## Validation and evidence status
+| Check | Result | Reviewed by | Date |
+| --- | --- | --- | --- |
+| Installed model, serial number, and MAC address match this record |  |  |  |
+| System name and management settings match the approved design |  |  |  |
+| SSH secure mode and approved administrative access work |  |  |  |
+| NTP is synchronized |  |  |  |
+| VLAN and port assignments match the approved port map |  |  |  |
+| Monitoring event reaches the approved destination |  |  |  |
+| Configuration is saved and backed up |  |  |  |
+| Labels, overview, diagrams, and port map are current |  |  |  |
 
-| Check | Status | Evidence reference |
-| --- | --- | --- |
-| Device identity matches this record | Demonstration only | Replace with implementation ticket attachment |
-| Management address and route verified | Demonstration only | Replace with command output reference |
-| VLANs and ports match the approved plan | Demonstration only | Replace with port-map and `show vlan` reference |
-| Monitoring event received | Demonstration only | Replace with collector or NAC event reference |
-| Final configuration saved and backed up | Demonstration only | Replace with backup job or file reference |
-| Related client overviews and diagrams updated | Demonstration only | Replace with document revision references |
-
-## Source records
-
-- Client Server Overview or Technical Overview.
-- IP address list and network scheme information.
-- LAN-WAN diagram and switch port map.
-- Rack or physical location diagram.
-- Final running-configuration backup.
-- Monitoring event evidence.
-- Implementation ticket and change approval.
-
-## Attestation
+## Approval
 
 | Role | Name | Signature or approval reference | Date |
 | --- | --- | --- | --- |
@@ -139,6 +131,8 @@ save config`}</code></pre>
 | Technical review |  |  |  |
 | Client acceptance |  |  |  |
 
-<div className="audit-record-footer">
-  Generated from the client overview and Extreme 5320 implementation standard. Review the rendered PDF before delivery.
-</div>
+## Revision log
+
+| Revision | Date | Description | Author |
+| ---: | --- | --- | --- |
+| 1.0 | August 28, 2026 | Initial demonstration record. | CBC |

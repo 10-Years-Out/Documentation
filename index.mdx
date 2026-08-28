@@ -1,72 +1,27 @@
 ---
-title: "Documentation that works like a product"
-description: "An interactive prototype for CBC implementation standards, built from the Extreme 5320 switch template."
-mode: "wide"
-icon: "sparkles"
+title: "Demo Bank documentation"
+description: "Client network records and implementation standards."
+icon: "folder-open"
 ---
 
-This prototype turns a static implementation standard into a guided, reusable system. It uses the Extreme 5320 switch configuration template as its source, then adds structure that helps authors maintain it and helps technicians use it.
+<div className="client-service-bar">
+  <span>Client Documentation</span>
+  <strong>Demo Bank</strong>
+</div>
 
-<Info>
-  This demo uses non-routable example addresses and invented client details. It contains no passwords or live client data.
-</Info>
+This site contains the current client network record and the implementation standard used to configure the installed switch.
 
-<Columns cols={3}>
-  <Card title="Build a configuration" icon="sliders" href="/switch/configure">
-    Change the deployment values and generate a ready-to-copy command set.
-  </Card>
-  <Card title="Open the client overview" icon="building-shield" href="/client/overview">
-    Define the client inventory once, then use it across procedures and reference pages.
-  </Card>
-  <Card title="Choose the right path" icon="split" href="/switch/conditional-paths">
-    Show NAC, XDR, backup, and MFA instructions only when they apply.
-  </Card>
-  <Card title="Print the auditor record" icon="file-certificate" href="/deliverables/switch-configuration-record">
-    Produce a client-facing record of the installed asset, exact settings, controls, and evidence.
-  </Card>
-</Columns>
+| Document | Revision | Status | Purpose |
+| --- | ---: | --- | --- |
+| [Network and switch overview](/client/overview) | 1.0 | Demonstration | Identifies the client, site, shared services, and installed switch. |
+| [Switch profiles](/client/switch-profiles) | Current inventory | Demonstration | Shows the switch records that supply client values to the standards and audit records. |
+| [Extreme 5320-48P-8XE Managed POE Switch Configuration](/switch/5320-configuration) | 1.2 | Demonstration | Gives the approved configuration procedure and exact client values. |
+| [Switch configuration record](/deliverables/switch-configuration-record) | 1.0 | Demonstration | Records the installed asset, configuration baseline, validation evidence, and approvals. |
 
-## One source, many useful views
+<Warning>
+  The values in this test branch are demonstration data. Do not give these records to a client or auditor as evidence of a completed implementation.
+</Warning>
 
-<mermaid code={`flowchart LR
-    A[Reusable switch profile] --> B[Preparation checklist]
-    A --> C[Interactive command builder]
-    A --> D[Definitions reference]
-    E[Environment choices] --> F{Applicable path}
-    F -->|NAC managed| G[XIQ-SE onboarding]
-    F -->|Standalone XDR| H[Direct syslog forwarding]
-    C --> I[Validation evidence]
-    G --> I
-    H --> I
-    I --> J[Revision record]`} />
+## How the documents stay current
 
-## What changes for the reader
-
-<Columns cols={2}>
-  <Card title="From placeholders to context" icon="database">
-    The client overview supplies the system name, address, gateway, services, and feature choices. Pages import stable device roles instead of repeating values.
-  </Card>
-  <Card title="From a long document to a job flow" icon="route">
-    The site separates planning, configuration, optional paths, validation, and reference material. The sidebar and page table of contents keep each task easy to find.
-  </Card>
-  <Card title="From command boxes to working tools" icon="terminal">
-    Commands are copyable, grouped by task, and generated from the values that the technician enters.
-  </Card>
-  <Card title="From revision table to a live feed" icon="clock-rotate-left">
-    Structured updates create filterable release notes and an RSS feed for standards changes.
-  </Card>
-</Columns>
-
-## Take the tour
-
-<Steps>
-  <Step title="Review the source model">
-    Start with the [switch overview](/switch/overview) to see how the Word template becomes a task-based standard.
-  </Step>
-  <Step title="Change the inputs">
-    Open the [configuration builder](/switch/configure) and edit the sample deployment values.
-  </Step>
-  <Step title="Inspect the authoring system">
-    Read the [tech showcase](/demo/tech-showcase) and [definitions reference](/reference/definitions) to see how the reusable parts fit together.
-  </Step>
-</Steps>
+Client-specific values are stored once in the `variables` section of `docs.json`. The overview, implementation standard, and audit record use the same global references. When a switch is replaced, update its variables and review the three documents before publication.

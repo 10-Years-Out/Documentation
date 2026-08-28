@@ -1,50 +1,56 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "CBC Documentation Lab",
+  "name": "CBC Client Documentation",
   "colors": {
-    "primary": "#4F46E5",
-    "light": "#6366F1",
-    "dark": "#A5B4FC"
+    "primary": "#194D33",
+    "light": "#287A52",
+    "dark": "#7FC49E"
   },
   "favicon": "/favicon.svg",
+  "variables": {
+    "client-name": "Demo Bank",
+    "site-name": "North Branch",
+    "site-code": "NORTH",
+    "network-location": "Network closet A",
+    "switch-reference": "north-access-1",
+    "switch-role": "North Branch primary access switch",
+    "switch-model": "Extreme 5320-48P-8XE",
+    "switch-system-name": "5320-48P-8XE-NORTH-01",
+    "switch-management-address": "192.0.2.10",
+    "switch-prefix-length": "24",
+    "switch-management-cidr": "192.0.2.10/24",
+    "switch-default-gateway": "192.0.2.1",
+    "switch-serial-number": "DEMO-5320-0001",
+    "switch-mac-address": "02:00:5E:10:00:01",
+    "switch-monitoring-design": "Standalone XDR syslog",
+    "switch-backup-method": "Kiwi CatTools",
+    "switch-mfa-status": "Enabled",
+    "ntp-server": "192.0.2.20",
+    "syslog-collector": "192.0.2.30",
+    "backup-host": "192.0.2.40",
+    "support-account": "monitorit@example.invalid"
+  },
   "navigation": {
     "pages": [
       {
-        "group": "Overview",
+        "group": "Client documentation",
         "pages": [
           "index",
-          "demo/tech-showcase"
+          "client/overview",
+          "client/switch-profiles"
         ]
       },
       {
-        "group": "Client source of truth",
+        "group": "Implementation standards",
         "pages": [
-          "client/overview"
+          "switch/5320-configuration"
         ]
       },
       {
-        "group": "Switch implementation",
-        "pages": [
-          "switch/overview",
-          "switch/prepare",
-          "switch/configure",
-          "switch/conditional-paths",
-          "switch/validate"
-        ]
-      },
-      {
-        "group": "Client deliverables",
+        "group": "Audit records",
         "pages": [
           "deliverables/switch-configuration-record"
-        ]
-      },
-      {
-        "group": "Reference",
-        "pages": [
-          "reference/definitions",
-          "reference/command-library",
-          "reference/revisions"
         ]
       }
     ],
@@ -54,11 +60,6 @@
           "anchor": "Source repository",
           "href": "https://github.com/10-Years-Out/Documentation",
           "icon": "github"
-        },
-        {
-          "anchor": "Mintlify documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open"
         }
       ]
     }
@@ -70,26 +71,20 @@
   "navbar": {
     "links": [
       {
-        "label": "See the tech",
-        "href": "/demo/tech-showcase"
+        "label": "Client overview",
+        "href": "/client/overview"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Build a configuration",
-      "href": "/switch/configure"
+      "label": "5320 switch standard",
+      "href": "/switch/5320-configuration"
     }
   },
   "contextual": {
     "options": [
       "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
+      "view"
     ]
   },
   "footer": {
