@@ -1,0 +1,41 @@
+---
+title: "Revision history"
+description: "Standards changes and prototype updates presented as a filterable Mintlify changelog."
+icon: "clock-rotate-left"
+---
+
+Each update has a stable anchor and filter tags. On a deployed site, this page also produces an RSS feed at `/reference/revisions/rss.xml`.
+
+<Update label="2026-08-28" description="Mintlify prototype" tags={["Demo", "Experience"]}>
+  ## Interactive documentation prototype
+
+  - Converted the 5320 standard into a task-based navigation flow.
+  - Added a shared deployment profile and VLAN plan.
+  - Added a live command builder with optional standalone XDR commands.
+  - Added explicit NAC, XDR, backup, voice, and MFA paths.
+  - Added structured acceptance checks, command reference, diagrams, and captioned source images.
+</Update>
+
+<Update label="2026-08-20" description="Switch standard revision 1.2" tags={["Switch standard", "XDR"]}>
+  ## Standalone switch XDR syslog
+
+  The source template added direct switch syslog forwarding for clients with standalone switch XDR.
+
+  The prototype keeps the condition explicit: do not apply the direct-switch block to a NAC-managed environment unless the approved design requires it.
+</Update>
+
+<Update label="2026-01-30" description="Switch standard revision 1.1" tags={["Switch standard", "Backup"]}>
+  ## Switch backup paths
+
+  The source template added Kiwi CatTools and manual backup sections. The prototype presents them as mutually exclusive reader choices.
+</Update>
+
+<Update label="2023-09-22" description="Switch standard revision 1.0" tags={["Switch standard"]}>
+  ## Original 5320 configuration standard
+
+  The initial document established the branch-switch setup, VLAN, labeling, access, and documentation workflow.
+</Update>
+
+<Info>
+  Keep the filename, page title, and revision record aligned when a client implementation document still needs a formal revision number. Git history and the changelog add traceability; they do not replace the required client record.
+</Info>

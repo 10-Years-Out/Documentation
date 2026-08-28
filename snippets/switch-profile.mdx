@@ -1,0 +1,43 @@
+export const profile = {
+  clientAlias: "Demo Bank",
+  dataClassification: "Demonstration data",
+  site: {
+    name: "North Branch",
+    code: "NORTH",
+    networkLocation: "Network closet A"
+  },
+  services: {
+    ntpServer: "192.0.2.20",
+    syslogCollector: "192.0.2.30",
+    backupHost: "192.0.2.40",
+    supportPortal: "https://extremeportal.force.com",
+    supportAccount: "monitorit@example.invalid"
+  },
+  switch: {
+    key: "northAccess1",
+    role: "North Branch primary access switch",
+    model: "Extreme 5320-48P-8XE",
+    systemName: "5320-48P-8XE-NORTH-01",
+    management: {
+      address: "192.0.2.10",
+      prefixLength: "24",
+      gateway: "192.0.2.1"
+    },
+    asset: {
+      serialNumber: "DEMO-5320-0001",
+      macAddress: "02:00:5E:10:00:01",
+      location: "Network closet A"
+    },
+    security: { mfaEnabled: true },
+    monitoring: { mode: "standalone-xdr", collector: "192.0.2.30" },
+    backup: { method: "Kiwi CatTools" },
+    features: { voiceVlan: true }
+  },
+  vlans: [
+    { id: 1, name: "Default", untagged: "1-4, 17-46", tagged: "48", purpose: "Unused or staging ports" },
+    { id: 11, name: "WLAN-MGMT", untagged: "5-8", tagged: "47-48", purpose: "Wireless management" },
+    { id: 20, name: "VOICE", untagged: "9-12", tagged: "47-48", purpose: "Voice endpoints" },
+    { id: 30, name: "NVR", untagged: "13-16", tagged: "47-48", purpose: "Video systems" },
+    { id: 40, name: "CORE", untagged: "None", tagged: "47-48", purpose: "Core transit" }
+  ]
+};

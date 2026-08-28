@@ -1,34 +1,64 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "name": "CBC Documentation Lab",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#4F46E5",
+    "light": "#6366F1",
+    "dark": "#A5B4FC"
   },
   "favicon": "/favicon.svg",
   "navigation": {
     "pages": [
       {
-        "group": "Getting Started",
+        "group": "Overview",
         "pages": [
           "index",
-          "quickstart"
+          "demo/tech-showcase"
+        ]
+      },
+      {
+        "group": "Client source of truth",
+        "pages": [
+          "client/overview"
+        ]
+      },
+      {
+        "group": "Switch implementation",
+        "pages": [
+          "switch/overview",
+          "switch/prepare",
+          "switch/configure",
+          "switch/conditional-paths",
+          "switch/validate"
+        ]
+      },
+      {
+        "group": "Client deliverables",
+        "pages": [
+          "deliverables/switch-configuration-record"
+        ]
+      },
+      {
+        "group": "Reference",
+        "pages": [
+          "reference/definitions",
+          "reference/command-library",
+          "reference/revisions"
         ]
       }
     ],
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "Source repository",
+          "href": "https://github.com/10-Years-Out/Documentation",
+          "icon": "github"
         },
         {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "Mintlify documentation",
+          "href": "https://mintlify.com/docs",
+          "icon": "book-open"
         }
       ]
     }
@@ -40,14 +70,14 @@
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "label": "See the tech",
+        "href": "/demo/tech-showcase"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
+      "label": "Build a configuration",
+      "href": "/switch/configure"
     }
   },
   "contextual": {
@@ -64,9 +94,7 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "github": "https://github.com/10-Years-Out/Documentation"
     }
   }
 }

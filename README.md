@@ -1,55 +1,30 @@
-# Mintlify Starter Kit
+# CBC Documentation Lab
 
-Use the starter kit to get your docs deployed and ready to customize.
+This repository is a Mintlify prototype for CBC implementation standards. The demo uses the Extreme 5320-48P-8XE switch standard to show task-based navigation, reusable definitions, conditional procedures, interactive configuration, command reference pages, diagrams, images, and revision history.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+All client names and addresses in the demo are examples. Do not add passwords or live client data.
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
-
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
-
-## AI-assisted writing
-
-Set up your AI coding tool to work with Mintlify:
+## Run the demo
 
 ```bash
-npx skills add https://mintlify.com/docs
+npx mint dev
 ```
 
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
+Open `http://localhost:3000`.
 
-See the [AI tools guides](/ai-tools) for tool-specific setup.
+## Validate changes
 
-## Development
-
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
-
-```
-npm i -g mint
+```bash
+npx mint validate
+npx mint broken-links
 ```
 
-Run the following command at the root of your documentation, where your `docs.json` is located:
+## Content model
 
-```
-mint dev
-```
+- `snippets/switch-profile.mdx` is the sample client source of truth. `client/overview.mdx` presents the same profile as an inventory page for people.
+- `snippets/config-builder.jsx` provides the interactive command builder.
+- `switch/` contains the technician workflow.
+- `deliverables/` contains print-ready client and auditor records generated from the same definitions.
+- `reference/` contains definitions, commands, and revisions.
 
-View your local preview at `http://localhost:3000`.
-
-## Publishing changes
-
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
-
-## Need help?
-
-### Troubleshooting
-
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
-
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+See [Mintlify documentation](https://mintlify.com/docs) for platform and component reference.

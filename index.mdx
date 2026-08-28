@@ -1,20 +1,72 @@
 ---
-title: "Introduction"
-description: "Welcome to your project"
+title: "Documentation that works like a product"
+description: "An interactive prototype for CBC implementation standards, built from the Extreme 5320 switch template."
+mode: "wide"
+icon: "sparkles"
 ---
 
-Write a short description of your product here. What it does, who it's for, and what they can accomplish with it.
+This prototype turns a static implementation standard into a guided, reusable system. It uses the Extreme 5320 switch configuration template as its source, then adds structure that helps authors maintain it and helps technicians use it.
 
-<Tip>
-  Ready to make this your own? Start by editing this page. Update your `docs.json` file to customize your site. Then fill out the [Quickstart](/quickstart) page.
-</Tip>
+<Info>
+  This demo uses non-routable example addresses and invented client details. It contains no passwords or live client data.
+</Info>
 
-<Card title="Quickstart" icon="rocket" href="/quickstart">
-  This card links to the quickstart page in your project.
-</Card>
-<Card title="Components" icon="puzzle-piece" href="https://mintlify.com/docs/components">
-  Add cards, callouts, steps, tabs, and more to design and structure your pages.
-</Card>
-<Card title="Settings" icon="gear" href="https://mintlify.com/docs/organize/settings">
-  Set your site name, branding, and navigation in the `docs.json` file.
-</Card>
+<Columns cols={3}>
+  <Card title="Build a configuration" icon="sliders" href="/switch/configure">
+    Change the deployment values and generate a ready-to-copy command set.
+  </Card>
+  <Card title="Open the client overview" icon="building-shield" href="/client/overview">
+    Define the client inventory once, then use it across procedures and reference pages.
+  </Card>
+  <Card title="Choose the right path" icon="split" href="/switch/conditional-paths">
+    Show NAC, XDR, backup, and MFA instructions only when they apply.
+  </Card>
+  <Card title="Print the auditor record" icon="file-certificate" href="/deliverables/switch-configuration-record">
+    Produce a client-facing record of the installed asset, exact settings, controls, and evidence.
+  </Card>
+</Columns>
+
+## One source, many useful views
+
+<mermaid code={`flowchart LR
+    A[Reusable switch profile] --> B[Preparation checklist]
+    A --> C[Interactive command builder]
+    A --> D[Definitions reference]
+    E[Environment choices] --> F{Applicable path}
+    F -->|NAC managed| G[XIQ-SE onboarding]
+    F -->|Standalone XDR| H[Direct syslog forwarding]
+    C --> I[Validation evidence]
+    G --> I
+    H --> I
+    I --> J[Revision record]`} />
+
+## What changes for the reader
+
+<Columns cols={2}>
+  <Card title="From placeholders to context" icon="database">
+    The client overview supplies the system name, address, gateway, services, and feature choices. Pages import stable device roles instead of repeating values.
+  </Card>
+  <Card title="From a long document to a job flow" icon="route">
+    The site separates planning, configuration, optional paths, validation, and reference material. The sidebar and page table of contents keep each task easy to find.
+  </Card>
+  <Card title="From command boxes to working tools" icon="terminal">
+    Commands are copyable, grouped by task, and generated from the values that the technician enters.
+  </Card>
+  <Card title="From revision table to a live feed" icon="clock-rotate-left">
+    Structured updates create filterable release notes and an RSS feed for standards changes.
+  </Card>
+</Columns>
+
+## Take the tour
+
+<Steps>
+  <Step title="Review the source model">
+    Start with the [switch overview](/switch/overview) to see how the Word template becomes a task-based standard.
+  </Step>
+  <Step title="Change the inputs">
+    Open the [configuration builder](/switch/configure) and edit the sample deployment values.
+  </Step>
+  <Step title="Inspect the authoring system">
+    Read the [tech showcase](/demo/tech-showcase) and [definitions reference](/reference/definitions) to see how the reusable parts fit together.
+  </Step>
+</Steps>

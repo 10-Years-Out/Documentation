@@ -1,0 +1,106 @@
+.audit-record-lead {
+  border-left: 4px solid #4f46e5;
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  background: #eef2ff;
+  color: #312e81;
+  font-weight: 600;
+}
+
+.audit-config {
+  border: 1px solid #d4d4d8;
+  border-radius: 0.75rem;
+  background: #09090b;
+  color: #a7f3d0;
+  padding: 1rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.audit-record-footer {
+  margin-top: 2rem;
+  border-top: 1px solid #d4d4d8;
+  padding-top: 0.75rem;
+  color: #52525b;
+  font-size: 0.8rem;
+}
+
+@media print {
+  @page {
+    size: Letter;
+    margin: 0.6in;
+  }
+
+  html[data-current-path="/deliverables/switch-configuration-record"] #navbar,
+  html[data-current-path="/deliverables/switch-configuration-record"] #mobile-nav,
+  html[data-current-path="/deliverables/switch-configuration-record"] #footer,
+  html[data-current-path="/deliverables/switch-configuration-record"] #pagination,
+  html[data-current-path="/deliverables/switch-configuration-record"] aside,
+  html[data-current-path="/deliverables/switch-configuration-record"] nav,
+  html[data-current-path="/deliverables/switch-configuration-record"] button,
+  html[data-current-path="/deliverables/switch-configuration-record"] .audit-print-button {
+    display: none !important;
+  }
+
+  html[data-current-path="/deliverables/switch-configuration-record"] #body-content,
+  html[data-current-path="/deliverables/switch-configuration-record"] #content-area,
+  html[data-current-path="/deliverables/switch-configuration-record"] #content {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  html[data-current-path="/deliverables/switch-configuration-record"] body {
+    background: white !important;
+    color: black !important;
+    font-size: 9.5pt;
+  }
+
+  html[data-current-path="/deliverables/switch-configuration-record"] h1 {
+    font-size: 20pt;
+  }
+
+  html[data-current-path="/deliverables/switch-configuration-record"] h2 {
+    margin-top: 18pt;
+    font-size: 13pt;
+    break-after: avoid;
+  }
+
+  html[data-current-path="/deliverables/switch-configuration-record"] table {
+    width: 100% !important;
+    font-size: 8.5pt;
+    break-inside: auto;
+  }
+
+  html[data-current-path="/deliverables/switch-configuration-record"] tr,
+  html[data-current-path="/deliverables/switch-configuration-record"] callout {
+    break-inside: avoid;
+  }
+
+  html[data-current-path="/deliverables/switch-configuration-record"] a {
+    color: black !important;
+    text-decoration: none !important;
+  }
+
+  html[data-current-path="/deliverables/switch-configuration-record"] .audit-config {
+    border: 1px solid #71717a;
+    background: #f4f4f5 !important;
+    color: black !important;
+    font-size: 7.5pt;
+    line-height: 1.35;
+    break-inside: auto;
+  }
+
+  html[data-current-path="/deliverables/switch-configuration-record"] .audit-record-lead {
+    background: #f4f4f5 !important;
+    color: black !important;
+  }
+
+  .audit-page-break {
+    break-before: page;
+  }
+}

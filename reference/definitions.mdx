@@ -1,0 +1,110 @@
+---
+title: "Dynamic definitions"
+description: "The shared deployment profile, variable contract, and VLAN plan used across the switch standard."
+icon: "brackets-curly"
+---
+
+import { profile } from "/snippets/switch-profile.mdx";
+
+The deployment profile is the single source for client-variable values in this prototype. Procedure pages import the profile instead of copying the values into each step.
+
+<Columns cols={2}>
+  <Card title="Deployment" icon="building">
+    **Client:** {profile.clientAlias}
+
+    **Location:** {profile.site.name}
+
+    **Role:** {profile.switch.role}
+  </Card>
+  <Card title="Management" icon="network-wired">
+    **System name:** <code>{profile.switch.systemName}</code>
+
+    **Address:** <code>{profile.switch.management.address}/{profile.switch.management.prefixLength}</code>
+
+    **Gateway:** <code>{profile.switch.management.gateway}</code>
+  </Card>
+  <Card title="Services" icon="server">
+    **NTP:** <code>{profile.services.ntpServer}</code>
+
+    **Syslog:** <code>{profile.services.syslogCollector}</code>
+  </Card>
+  <Card title="Feature choices" icon="route">
+    **Monitoring:** {profile.switch.monitoring.mode === "standalone-xdr" ? "Standalone XDR" : "NAC-managed"}
+
+    **Backup:** {profile.switch.backup.method}
+
+    **Voice VLAN:** {profile.switch.features.voiceVlan ? "Included" : "Not used"}
+  </Card>
+</Columns>
+
+## Definition contract
+
+<ParamField path="profile.clientAlias" type="string" required>
+  The approved client alias used in navigation, labels, and records. Demo value: **{profile.clientAlias}**.
+</ParamField>
+
+<ParamField path="profile.site.name" type="string" required>
+  The physical or logical switch location. Demo value: **{profile.site.name}**.
+</ParamField>
+
+<ParamField path="profile.switch.systemName" type="string" required>
+  The switch system name from the approved naming standard. Demo value: <code>{profile.switch.systemName}</code>.
+</ParamField>
+
+<ParamField path="profile.switch.management.address" type="IPv4 address" required>
+  The unused management address assigned in the network records. Demo value: <code>{profile.switch.management.address}</code>.
+</ParamField>
+
+<ParamField path="profile.services.syslogCollector" type="IPv4 address">
+  The collector for direct standalone XDR syslog. Omit this value from the direct-switch procedure for a NAC-managed design.
+</ParamField>
+
+<ParamField path="profile.switch.monitoring.mode" type="string" required>
+  Selects the direct switch-to-collector path. This value must be false when the NAC platform owns event forwarding.
+</ParamField>
+
+<Warning>
+  Do not put passwords in the profile. Point the technician to the approved password source.
+</Warning>
+
+## VLAN plan
+
+| ID | Name | Untagged ports | Tagged ports | Purpose |
+| ---: | --- | --- | --- | --- |
+| {profile.vlans[0].id} | <code>{profile.vlans[0].name}</code> | <code>{profile.vlans[0].untagged}</code> | <code>{profile.vlans[0].tagged}</code> | {profile.vlans[0].purpose} |
+| {profile.vlans[1].id} | <code>{profile.vlans[1].name}</code> | <code>{profile.vlans[1].untagged}</code> | <code>{profile.vlans[1].tagged}</code> | {profile.vlans[1].purpose} |
+| {profile.vlans[2].id} | <code>{profile.vlans[2].name}</code> | <code>{profile.vlans[2].untagged}</code> | <code>{profile.vlans[2].tagged}</code> | {profile.vlans[2].purpose} |
+| {profile.vlans[3].id} | <code>{profile.vlans[3].name}</code> | <code>{profile.vlans[3].untagged}</code> | <code>{profile.vlans[3].tagged}</code> | {profile.vlans[3].purpose} |
+| {profile.vlans[4].id} | <code>{profile.vlans[4].name}</code> | <code>{profile.vlans[4].untagged}</code> | <code>{profile.vlans[4].tagged}</code> | {profile.vlans[4].purpose} |
+
+## How authors use the profile
+
+<CodeGroup>
+
+```jsx Define once
+export const client = {
+  services: {
+    ntpServer: "192.0.2.20",
+    syslogCollector: "192.0.2.30"
+  },
+  switches: {
+    northAccess1: {
+      systemName: "5320-48P-8XE-NORTH-01",
+      management: { address: "192.0.2.10", prefixLength: "24" }
+    }
+  }
+};
+```
+
+```mdx Refer everywhere
+import { profile } from "/snippets/switch-profile.mdx";
+
+Connect to `{profile.switch.systemName}` at
+`{profile.switch.management.address}`.
+```
+
+</CodeGroup>
+
+<Tip>
+  For production, generate one profile from controlled client records or deliver values after authentication. Do not copy live client data into a public repository.
+</Tip>
