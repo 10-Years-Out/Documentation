@@ -1,20 +1,27 @@
 ---
-title: "Introduction"
-description: "Welcome to your project"
+title: "Demo Bank documentation"
+description: "Client network records and implementation standards."
+icon: "folder-open"
 ---
 
-Write a short description of your product here. What it does, who it's for, and what they can accomplish with it.
+<div className="client-service-bar">
+  <span>Client Documentation</span>
+  <strong>Demo Bank</strong>
+</div>
 
-<Tip>
-  Ready to make this your own? Start by editing this page. Update your `docs.json` file to customize your site. Then fill out the [Quickstart](/quickstart) page.
-</Tip>
+This site contains the current client network record and the implementation standard used to configure the installed switch.
 
-<Card title="Quickstart" icon="rocket" href="/quickstart">
-  This card links to the quickstart page in your project.
-</Card>
-<Card title="Components" icon="puzzle-piece" href="https://mintlify.com/docs/components">
-  Add cards, callouts, steps, tabs, and more to design and structure your pages.
-</Card>
-<Card title="Settings" icon="gear" href="https://mintlify.com/docs/organize/settings">
-  Set your site name, branding, and navigation in the `docs.json` file.
-</Card>
+| Document | Revision | Status | Purpose |
+| --- | ---: | --- | --- |
+| [Network and switch overview](/client/overview) | 1.0 | Demonstration | Identifies the client, site, shared services, and installed switch. |
+| [Switch profiles](/client/switch-profiles) | Current inventory | Demonstration | Shows the switch records that supply client values to the standards and audit records. |
+| [Extreme 5320-48P-8XE Managed POE Switch Configuration](/switch/5320-configuration) | 1.2 | Demonstration | Gives the approved configuration procedure and exact client values. |
+| [Switch configuration record](/deliverables/switch-configuration-record) | 1.0 | Demonstration | Records the installed asset, configuration baseline, validation evidence, and approvals. |
+
+<Warning>
+  The values in this test branch are demonstration data. Do not give these records to a client or auditor as evidence of a completed implementation.
+</Warning>
+
+## How the documents stay current
+
+Client-specific values are stored once in the `variables` section of `docs.json`. The overview, implementation standard, and audit record use the same global references. When a switch is replaced, update its variables and review the three documents before publication.

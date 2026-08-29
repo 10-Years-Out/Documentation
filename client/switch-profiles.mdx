@@ -1,0 +1,24 @@
+---
+title: "Switch profiles"
+description: "Edit the switch inventory used by client standards and configuration records."
+icon: "table"
+mode: "wide"
+---
+
+| Client Switch Inventory | {{client-name}} |
+| :--- | ---: |
+
+The values in this table come from the global `variables` section of `docs.json`. Edit a value there once in the Mintlify web editor. Mintlify updates every matching reference when it builds the site.
+
+## Switch profiles
+
+| Reference | Site | Role | Model | System name | Management CIDR | Gateway | Serial number | MAC address | Location | Monitoring mode | Syslog collector | Backup method | MFA | Voice VLAN |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| {{switch-reference}} | {{site-name}} | {{switch-role}} | {{switch-model}} | {{switch-system-name}} | {{switch-management-cidr}} | {{switch-default-gateway}} | {{switch-serial-number}} | {{switch-mac-address}} | {{network-location}} | {{switch-monitoring-design}} | {{syslog-collector}} | {{switch-backup-method}} | {{switch-mfa-status}} | Yes |
+
+## Editing rules
+
+- Keep `switch-reference` stable when you replace a physical switch.
+- Use plain, printable values for monitoring and MFA status.
+- Do not enter passwords, private keys, or other secrets.
+- Review the commands and configuration record after Mintlify rebuilds the branch.

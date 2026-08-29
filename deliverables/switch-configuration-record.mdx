@@ -1,0 +1,138 @@
+---
+title: "Switch configuration record"
+description: "Client and audit record for the installed Extreme 5320 switch."
+icon: "file-lines"
+---
+
+import { PrintRecordButton } from "/snippets/print-record-button.jsx";
+
+| Client Configuration Record | {{client-name}} |
+| :--- | ---: |
+
+<PrintRecordButton />
+
+| Document information | Value |
+| --- | --- |
+| Title | Extreme 5320 switch configuration record |
+| Revision | 1.0 |
+| Issued | August 28, 2026 |
+| Client | {{client-name}} |
+| Site | {{site-name}} |
+| Status | Demonstration — evidence not complete |
+
+## Purpose
+
+This record identifies the installed switch and the configuration applied under the [Extreme 5320 switch standard](/switch/5320-configuration). Keep it with the final running configuration, validation output, diagrams, and implementation approval.
+
+## Installed switch
+
+| Field | Recorded value |
+| --- | --- |
+| Device reference | {{switch-reference}} |
+| Role | {{switch-role}} |
+| Manufacturer and model | {{switch-model}} |
+| System name | {{switch-system-name}} |
+| Serial number | {{switch-serial-number}} |
+| MAC address | {{switch-mac-address}} |
+| Physical location | {{network-location}} |
+
+## Approved configuration
+
+| Setting | Recorded value |
+| --- | --- |
+| Management address | {{switch-management-cidr}} |
+| Default gateway | {{switch-default-gateway}} |
+| NTP server | {{ntp-server}} |
+| Syslog collector | {{syslog-collector}} |
+| Monitoring | {{switch-monitoring-design}} |
+| Configuration backup | {{switch-backup-method}} |
+| MFA administrative access | {{switch-mfa-status}} |
+
+### VLAN and port configuration
+
+| VLAN | Name | Untagged ports | Tagged ports | Purpose |
+| ---: | --- | --- | --- | --- |
+| 1 | Default | 1-4, 17-46 | 48 | Unused or staging ports |
+| 11 | WLAN-MGMT | 5-8 | 47-48 | Wireless management |
+| 20 | VOICE | 9-12 | 47-48 | Voice endpoints |
+| 30 | NVR | 13-16 | 47-48 | Video systems |
+| 40 | CORE | None | 47-48 | Core transit |
+
+<div className="document-page-break" />
+
+## Configuration baseline
+
+This baseline uses the same global Mintlify variables as the implementation standard.
+
+```bash Applied configuration baseline
+disable dhcp vlan default
+configure vlan default ipaddress {{switch-management-cidr}}
+configure iproute add default {{switch-default-gateway}} vr VR-Default
+configure snmp sysName {{switch-system-name}}
+enable ssh2
+configure ssh2 secure-mode on
+
+enable ntp
+configure ntp server add {{ntp-server}}
+configure timezone name EST -300 autodst name EDT begins every second sunday march at 2 00 ends every first sunday november at 2 00
+configure ntp local-clock none
+
+create vlan WLAN-MGMT tag 11
+configure vlan WLAN-MGMT add ports 5-8 untagged
+configure vlan WLAN-MGMT add ports 47-48 tagged
+
+create vlan VOICE tag 20
+configure vlan VOICE add ports 9-12 untagged
+configure vlan VOICE add ports 47-48 tagged
+
+create vlan NVR tag 30
+configure vlan NVR add ports 13-16 untagged
+configure vlan NVR add ports 47-48 tagged
+
+create vlan CORE tag 40
+configure vlan CORE add ports 47-48 tagged
+
+configure syslog add {{syslog-collector}} vr VR-Default local0
+enable syslog
+enable nodealias ports all
+save config
+```
+
+The final running configuration is the authoritative record of the device. Attach it or enter its controlled file reference below.
+
+| Evidence item | File, ticket, or approval reference |
+| --- | --- |
+| Final running configuration |  |
+| Successful configuration backup |  |
+| `show vlan` output |  |
+| `show ntp` output |  |
+| Monitoring test event |  |
+| Installation and label photographs |  |
+| Updated network diagram and port map |  |
+
+## Validation
+
+| Check | Result | Reviewed by | Date |
+| --- | --- | --- | --- |
+| Installed model, serial number, and MAC address match this record |  |  |  |
+| System name and management settings match the approved design |  |  |  |
+| SSH secure mode and approved administrative access work |  |  |  |
+| NTP is synchronized |  |  |  |
+| VLAN and port assignments match the approved port map |  |  |  |
+| Monitoring event reaches the approved destination |  |  |  |
+| Configuration is saved and backed up |  |  |  |
+| Labels, overview, diagrams, and port map are current |  |  |  |
+
+## Approval
+
+| Role | Name | Signature or approval reference | Date |
+| --- | --- | --- | --- |
+| Implemented by |  |  |  |
+| Technical review |  |  |  |
+| Client acceptance |  |  |  |
+
+## Revision log
+
+| Revision | Date | Description | Author |
+| ---: | --- | --- | --- |
+| 1.0 | August 28, 2026 | Initial demonstration record. | CBC |

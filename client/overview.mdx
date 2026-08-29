@@ -1,0 +1,55 @@
+---
+title: "Network and switch overview"
+description: "The client source for shared network services and installed switch records."
+icon: "building"
+---
+
+| Client Documentation | {{client-name}} |
+| :--- | ---: |
+
+| Document | Revision | Updated | Status |
+| --- | ---: | --- | --- |
+| Network and switch overview | 1.0 | August 28, 2026 | Demonstration |
+
+## Purpose
+
+This document identifies the shared services and installed switch used by the client network. Implementation standards refer to this record instead of repeating client values.
+
+## Definitions
+
+| Definition | Value |
+| --- | --- |
+| Client | {{client-name}} |
+| Site | {{site-name}} |
+| Site code | {{site-code}} |
+| Network location | {{network-location}} |
+| NTP server | {{ntp-server}} |
+| Syslog collector | {{syslog-collector}} |
+| Configuration backup host | {{backup-host}} |
+
+## Installed switch
+
+| Field | Recorded value |
+| --- | --- |
+| Stable device reference | {{switch-reference}} |
+| Role | {{switch-role}} |
+| Manufacturer and model | {{switch-model}} |
+| System name | {{switch-system-name}} |
+| Management address | {{switch-management-cidr}} |
+| Default gateway | {{switch-default-gateway}} |
+| Serial number | {{switch-serial-number}} |
+| MAC address | {{switch-mac-address}} |
+| Physical location | {{network-location}} |
+| Monitoring | {{switch-monitoring-design}} |
+| Configuration backup | {{switch-backup-method}} |
+| MFA administrative access | {{switch-mfa-status}} |
+
+## Replacement control
+
+The stable device reference is `{{switch-reference}}`. Keep this reference when the physical switch is replaced. Update its values once in the `variables` section of `docs.json`. Mintlify then updates every reference in the implementation standard and configuration record.
+
+## Revision log
+
+| Revision | Date | Description | Author |
+| ---: | --- | --- | --- |
+| 1.0 | August 28, 2026 | Initial demonstration record. | CBC |
