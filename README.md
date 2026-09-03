@@ -40,6 +40,16 @@ mint dev
 
 View your local preview at `http://localhost:3000`.
 
+## Policy catalog
+
+Overview tables, the date table at the top of each policy, and the Templates / Banks sidebar are generated from policy frontmatter.
+
+```bash
+node scripts/generate-catalog.mjs
+```
+
+CI fails if those generated files are out of date. Add a new template MDX file, then run the command above so it appears in the catalog and navigation. Bank copies are not created automatically.
+
 ## Publishing changes
 
 Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
