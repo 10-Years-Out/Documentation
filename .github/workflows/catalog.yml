@@ -1,0 +1,20 @@
+name: Catalog
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify generated catalog files
+        run: node scripts/generate-catalog.mjs --check
+      - name: Test catalog generator
+        run: node scripts/generate-catalog.test.mjs
