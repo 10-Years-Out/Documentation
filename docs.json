@@ -9,111 +9,107 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "dropdowns": [
+    "groups": [
       {
-        "dropdown": "Overview",
-        "icon": "house",
-        "groups": [
+        "group": "Policies",
+        "pages": [
           {
-            "group": "Overview",
+            "group": "Templates",
             "pages": [
-              "index"
+              {
+                "group": "InfoSec",
+                "pages": [
+                  "templates/infosec/isp-001-authentication",
+                  "templates/infosec/isp-002-iam-authorization",
+                  "templates/infosec/isp-003-network-access",
+                  "templates/infosec/isp-004-remote-network-access",
+                  "templates/infosec/isp-005-device-remote-synchronized-access",
+                  "templates/infosec/isp-006-cloud-application-infrastructure",
+                  "templates/infosec/isp-007-artificial-intelligence",
+                  "templates/infosec/isp-008-wireless-network-access",
+                  "templates/infosec/isp-009-removable-storage",
+                  "templates/infosec/isp-010-endpoint-security",
+                  "templates/infosec/isp-011-perimeter-security",
+                  "templates/infosec/isp-012-vulnerability-management",
+                  "templates/infosec/isp-013-virtualization",
+                  "templates/infosec/isp-014-patch-management",
+                  "templates/infosec/isp-015-end-of-life-management",
+                  "templates/infosec/isp-016-physical-control",
+                  "templates/infosec/isp-017-encryption",
+                  "templates/infosec/isp-018-software-development-acquisition",
+                  "templates/infosec/isp-019-personnel-security-information-handling",
+                  "templates/infosec/isp-020-data-destruction-disposal",
+                  "templates/infosec/isp-021-monitoring-alerting",
+                  "templates/infosec/isp-022-capacity-performance-management",
+                  "templates/infosec/isp-023-technology-emergency-response",
+                  "templates/infosec/isp-024-service-provider-oversight",
+                  "templates/infosec/isp-025-data-backup",
+                  "templates/infosec/isp-026-social-media",
+                  "templates/infosec/isp-027-glba-risk-assessment",
+                  "templates/infosec/isp-028-threat-information-management",
+                  "templates/infosec/isp-029-auditing",
+                  "templates/infosec/isp-030-change-management",
+                  "templates/infosec/isp-031-task-project-management",
+                  "templates/infosec/isp-032-audit-log-management",
+                  "templates/infosec/isp-033-program-update",
+                  "templates/infosec/isp-034-strategic-plan",
+                  "templates/infosec/isp-035-maturity-model",
+                  "templates/infosec/isp-036-training",
+                  "templates/infosec/isp-037-board-reporting"
+                ]
+              }
             ]
-          }
-        ]
-      },
-      {
-        "dropdown": "Templates",
-        "icon": "file-lines",
-        "groups": [
+          },
           {
-            "group": "InfoSec",
+            "group": "Clients",
             "pages": [
-              "templates/infosec/isp-001-authentication",
-              "templates/infosec/isp-002-iam-authorization",
-              "templates/infosec/isp-003-network-access",
-              "templates/infosec/isp-004-remote-network-access",
-              "templates/infosec/isp-005-device-remote-synchronized-access",
-              "templates/infosec/isp-006-cloud-application-infrastructure",
-              "templates/infosec/isp-007-artificial-intelligence",
-              "templates/infosec/isp-008-wireless-network-access",
-              "templates/infosec/isp-009-removable-storage",
-              "templates/infosec/isp-010-endpoint-security",
-              "templates/infosec/isp-011-perimeter-security",
-              "templates/infosec/isp-012-vulnerability-management",
-              "templates/infosec/isp-013-virtualization",
-              "templates/infosec/isp-014-patch-management",
-              "templates/infosec/isp-015-end-of-life-management",
-              "templates/infosec/isp-016-physical-control",
-              "templates/infosec/isp-017-encryption",
-              "templates/infosec/isp-018-software-development-acquisition",
-              "templates/infosec/isp-019-personnel-security-information-handling",
-              "templates/infosec/isp-020-data-destruction-disposal",
-              "templates/infosec/isp-021-monitoring-alerting",
-              "templates/infosec/isp-022-capacity-performance-management",
-              "templates/infosec/isp-023-technology-emergency-response",
-              "templates/infosec/isp-024-service-provider-oversight",
-              "templates/infosec/isp-025-data-backup",
-              "templates/infosec/isp-026-social-media",
-              "templates/infosec/isp-027-glba-risk-assessment",
-              "templates/infosec/isp-028-threat-information-management",
-              "templates/infosec/isp-029-auditing",
-              "templates/infosec/isp-030-change-management",
-              "templates/infosec/isp-031-task-project-management",
-              "templates/infosec/isp-032-audit-log-management",
-              "templates/infosec/isp-033-program-update",
-              "templates/infosec/isp-034-strategic-plan",
-              "templates/infosec/isp-035-maturity-model",
-              "templates/infosec/isp-036-training",
-              "templates/infosec/isp-037-board-reporting"
-            ]
-          }
-        ]
-      },
-      {
-        "dropdown": "HSLC",
-        "icon": "building-columns",
-        "groups": [
-          {
-            "group": "InfoSec",
-            "pages": [
-              "clients/hslc/infosec/isp-001-authentication",
-              "clients/hslc/infosec/isp-002-iam-authorization",
-              "clients/hslc/infosec/isp-003-network-access",
-              "clients/hslc/infosec/isp-004-remote-network-access",
-              "clients/hslc/infosec/isp-005-device-remote-synchronized-access",
-              "clients/hslc/infosec/isp-006-cloud-application-infrastructure",
-              "clients/hslc/infosec/isp-007-artificial-intelligence",
-              "clients/hslc/infosec/isp-008-wireless-network-access",
-              "clients/hslc/infosec/isp-009-removable-storage",
-              "clients/hslc/infosec/isp-010-endpoint-security",
-              "clients/hslc/infosec/isp-011-perimeter-security",
-              "clients/hslc/infosec/isp-012-vulnerability-management",
-              "clients/hslc/infosec/isp-013-virtualization",
-              "clients/hslc/infosec/isp-014-patch-management",
-              "clients/hslc/infosec/isp-015-end-of-life-management",
-              "clients/hslc/infosec/isp-016-physical-control",
-              "clients/hslc/infosec/isp-017-encryption",
-              "clients/hslc/infosec/isp-018-software-development-acquisition",
-              "clients/hslc/infosec/isp-019-personnel-security-information-handling",
-              "clients/hslc/infosec/isp-020-data-destruction-disposal",
-              "clients/hslc/infosec/isp-021-monitoring-alerting",
-              "clients/hslc/infosec/isp-022-capacity-performance-management",
-              "clients/hslc/infosec/isp-023-technology-emergency-response",
-              "clients/hslc/infosec/isp-024-service-provider-oversight",
-              "clients/hslc/infosec/isp-025-data-backup",
-              "clients/hslc/infosec/isp-026-social-media",
-              "clients/hslc/infosec/isp-027-glba-risk-assessment",
-              "clients/hslc/infosec/isp-028-threat-information-management",
-              "clients/hslc/infosec/isp-029-auditing",
-              "clients/hslc/infosec/isp-030-change-management",
-              "clients/hslc/infosec/isp-031-task-project-management",
-              "clients/hslc/infosec/isp-032-audit-log-management",
-              "clients/hslc/infosec/isp-033-program-update",
-              "clients/hslc/infosec/isp-034-strategic-plan",
-              "clients/hslc/infosec/isp-035-maturity-model",
-              "clients/hslc/infosec/isp-036-training",
-              "clients/hslc/infosec/isp-037-board-reporting"
+              {
+                "group": "HSLC",
+                "pages": [
+                  {
+                    "group": "InfoSec",
+                    "pages": [
+                      "clients/hslc/infosec/isp-001-authentication",
+                      "clients/hslc/infosec/isp-002-iam-authorization",
+                      "clients/hslc/infosec/isp-003-network-access",
+                      "clients/hslc/infosec/isp-004-remote-network-access",
+                      "clients/hslc/infosec/isp-005-device-remote-synchronized-access",
+                      "clients/hslc/infosec/isp-006-cloud-application-infrastructure",
+                      "clients/hslc/infosec/isp-007-artificial-intelligence",
+                      "clients/hslc/infosec/isp-008-wireless-network-access",
+                      "clients/hslc/infosec/isp-009-removable-storage",
+                      "clients/hslc/infosec/isp-010-endpoint-security",
+                      "clients/hslc/infosec/isp-011-perimeter-security",
+                      "clients/hslc/infosec/isp-012-vulnerability-management",
+                      "clients/hslc/infosec/isp-013-virtualization",
+                      "clients/hslc/infosec/isp-014-patch-management",
+                      "clients/hslc/infosec/isp-015-end-of-life-management",
+                      "clients/hslc/infosec/isp-016-physical-control",
+                      "clients/hslc/infosec/isp-017-encryption",
+                      "clients/hslc/infosec/isp-018-software-development-acquisition",
+                      "clients/hslc/infosec/isp-019-personnel-security-information-handling",
+                      "clients/hslc/infosec/isp-020-data-destruction-disposal",
+                      "clients/hslc/infosec/isp-021-monitoring-alerting",
+                      "clients/hslc/infosec/isp-022-capacity-performance-management",
+                      "clients/hslc/infosec/isp-023-technology-emergency-response",
+                      "clients/hslc/infosec/isp-024-service-provider-oversight",
+                      "clients/hslc/infosec/isp-025-data-backup",
+                      "clients/hslc/infosec/isp-026-social-media",
+                      "clients/hslc/infosec/isp-027-glba-risk-assessment",
+                      "clients/hslc/infosec/isp-028-threat-information-management",
+                      "clients/hslc/infosec/isp-029-auditing",
+                      "clients/hslc/infosec/isp-030-change-management",
+                      "clients/hslc/infosec/isp-031-task-project-management",
+                      "clients/hslc/infosec/isp-032-audit-log-management",
+                      "clients/hslc/infosec/isp-033-program-update",
+                      "clients/hslc/infosec/isp-034-strategic-plan",
+                      "clients/hslc/infosec/isp-035-maturity-model",
+                      "clients/hslc/infosec/isp-036-training",
+                      "clients/hslc/infosec/isp-037-board-reporting"
+                    ]
+                  }
+                ]
+              }
             ]
           }
         ]
