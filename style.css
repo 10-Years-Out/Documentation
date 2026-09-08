@@ -4,5 +4,5 @@ html:not(.dark) #navbar,
 html:not(.dark) #sidebar,
 html:not(.dark) #content-area,
 html:not(.dark) #body-content {
-  background-color: #F6F1E7;
+  background-color: #F8F6F1;
 }
