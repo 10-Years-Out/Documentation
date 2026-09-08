@@ -1,0 +1,46 @@
+---
+title: Data Backup Policy
+policy_id: ISP-025
+---
+
+## Intent
+
+The purpose of this policy is to minimize the risk to [[SHORT_NAME]] information systems due to loss of equipment or data.
+
+## Scope
+
+The policy applies to the backup procedure of all information systems electronic data.
+
+## Policy
+
+This policy is a statement of the client's actual backup configuration. There is no shared prose to inherit. Populate each bullet from the client's environment and remove any that do not apply.
+
+- Servers are being replicated to the DR site over [[DR_REPLICATION_LINK]] using [[BACKUP_SOFTWARE]] Backup & Replication software starting at [[DR_REPLICATION_START_TIME]] every night.
+  - [[DR_RESTORE_POINT_COUNT]] restore points are kept offsite.
+  - These replicas are ready to start as virtual machines on the DR server.
+  - Transmission of replicas is encrypted using [[BACKUP_ENCRYPTION]]
+
+- [[HOURLY_BACKUP_SERVERS]] are being backed up hourly to the local NAS device.
+  - [[HOURLY_RESTORE_POINT_COUNT]] restore points are kept.
+  - Images contain full server data needed to do a bare metal restore and individual file restore.
+  - Backups are encrypted using [[BACKUP_ENCRYPTION]].
+
+- [[DAILY_BACKUP_SERVERS]] are being backed up daily starting at [[DAILY_BACKUP_START_TIME]] to the local NAS device.
+  - [[DAILY_RESTORE_POINT_COUNT]] restore points are kept.
+  - Images contain full server data needed to do a bare metal restore and individual file restore.
+  - Backups are encrypted using [[BACKUP_ENCRYPTION]].
+
+- [[WEEKLY_BACKUP_ASSETS]] are being backed up weekly on [[WEEKLY_BACKUP_DAY]] to the local NAS device
+  - [[WEEKLY_RESTORE_POINT_COUNT]] restore points are kept.
+  - Images contain full server data needed to do a bare metal restore and individual file restore.
+  - Backups are encrypted using [[BACKUP_ENCRYPTION]].
+
+- All virtual machines are being backed up to the DR site after the nightly replicas have finished running.
+
+- All local and offsite backups on the NAS devices are stored as immutable backups and cannot be altered (modified or deleted) for [[IMMUTABLE_RETENTION_DAYS]] days.
+
+- The [[CLOUD_PRODUCTIVITY_SUITE]] environment data is being backed up daily to a NAS device with immutable backups at the main branch.
+
+## Compliance
+
+See Backup Guidelines in the ISPD for additional information and guidance.

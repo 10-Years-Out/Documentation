@@ -1,0 +1,99 @@
+---
+title: Authentication Policy
+policy_id: ISP-001
+---
+
+## Intent
+
+The purpose of this policy is to establish a standard for creation of strong passwords, the protection of those passwords, and the frequency of change.
+
+## Scope
+
+The scope of this policy includes all personnel who have or are responsible for an account (or any form of access that supports or requires a password) on any system that resides at any [[SHORT_NAME]] facility, has access to [[SHORT_NAME]] network, or stores any non-public [[SHORT_NAME]] information.
+
+## Policy
+
+### General
+
+- All system-level passwords (e.g. Administrator, enabled service accounts, application administration accounts) must be changed as necessary.
+
+- All user-level passwords for the [[SHORT_NAME]] network must be changed every [[PASSWORD_MAX_AGE_DAYS]] days. This is enforced automatically using software on the network.
+
+- Password history will be enforced automatically through Group Policy on the network and [[PASSWORD_HISTORY_COUNT]] passwords will be remembered for all user-level accounts.
+
+- The core system is configured to use SSO with the network login requirements.
+
+- All user-level accounts shall be created with a temporary password and require change at first user logon.
+
+- System-level passwords that are known to multiple individuals (e.g. Administrator) shall be changed immediately when any individual having access is no longer included in the policy scope (i.e. employee termination).
+
+- User accounts that have system-level privileges granted through group memberships (such as "Domain Admins") must have a unique password from all other accounts held by that user.
+
+- Passwords must not be inserted into email messages or other forms of electronic communication unless they are encrypted.
+
+- Default vendor passwords must be changed immediately upon device or software installation.
+
+- If SNMP (Simple Network Management Protocol) is used for device management or monitoring:
+
+  - The SNMP community strings must be defined as something other than the standard defaults of "public," "private" and "system" and must be different from the passwords used to log in interactively.
+
+  - A keyed hash must be used where available (e.g., SNMPv2).
+
+  - Where a keyed hash is not available, no SNMP use shall be permitted across public networks (Internet).
+
+  - SNMP access shall also be limited to READ access where possible.
+
+  - SNMP access shall be limited to a designated management station where possible.
+
+- Where possible, systems shall integrate authentication with the Windows domain, either through direct LDAP or RADIUS support.
+
+- New domain accounts will have a temporary password that the user will be required to change upon initial login.
+
+- Domain administrator and service accounts shall be changed on an annual basis.
+
+- All user-level and system-level passwords must conform to the guidelines described below.
+
+### Password Requirements
+
+- All network and core passwords shall consist of at least [[PASSWORD_CHARACTER_TYPE_COUNT]] of the 4 following character types:
+
+  - Uppercase letters
+  - Lowercase letters
+  - Numerals
+  - Special characters (i.e. punctuation marks or symbols)
+
+- All network and core passwords shall contain a minimum of [[PASSWORD_MIN_LENGTH]] characters.
+
+- Passwords shall not contain any word found in a dictionary (English or foreign language), nor contain any personal information about the user that may be readily obtained by other individuals.
+
+- Users shall not use passwords for [[SHORT_NAME]] accounts that are also used for any other account (online banking, personal email).
+
+- Workstations will auto lock after [[WORKSTATION_LOCK_MINUTES]] minutes idle.
+
+- Network and core user accounts will lock after [[ACCOUNT_LOCKOUT_THRESHOLD]] unsuccessful login attempts
+
+- These requirements will be enforced automatically using software on the network and on the core applications through its settings.
+
+### Password Protection Requirements
+
+- Passwords shall not be shared with any other individual, including family or co-workers.
+
+- Passwords shall not be sent in email or any other electronic communication unless they are encrypted.
+
+- Employees will be responsible for safekeeping all passwords.
+
+- Users shall not write down or store the password on paper or on a computer system where others might acquire it.
+
+- If an account or password or password book is suspected to have been compromised, report the incident to the IT Department and change all passwords.
+
+### Passphrase Requirements
+
+- Where system access is controlled through the use of a passphrase, such as public/private key systems:
+  - All the rules above that apply to passwords shall apply to passphrases
+  - Additionally, passphrases shall consist of multiple words and/or conform to vendor requirements
+
+- Refer to the Acceptable Use Policy for more information and training assistance.
+
+## Compliance
+
+These criteria are subject to change based on results of audits utilized by the IT department periodically. Any password vulnerabilities will be identified at that time and upon the [[COMMITTEE]]'s approval, corrective action will be taken to reduce the password vulnerability.

@@ -1,0 +1,74 @@
+---
+title: Audit Log Management Policy
+policy_id: ISP-032
+---
+
+## Intent
+
+The purpose of this policy is to establish the requirements for logging configurations on devices and the requirements for maintaining log data.
+
+## Scope
+
+The policy applies to all information assets on the [[SHORT_NAME]] network.
+
+## Policy
+
+- [[SHORT_NAME]] retains log data from all devices in a secure, centralized repository for [[LOG_RETENTION_PERIOD]].
+
+- The following logging settings are enforced on all servers through group policy on the network:
+  - Audit Credential Validation - Success and Failure
+  - Audit Kerberos Authentication Service – Success and Failure
+  - Audit Kerberos Service Ticket Operations – Success and Failure
+  - Audit Other Account Logon Events – Success and Failure
+  - Audit Application Group Management – Success and Failure
+  - Audit Computer Account Management - Success and Failure
+  - Audit Distribution Group Management - Success and Failure (DC's Only)
+  - Audit Other Account Management Events - Success and Failure
+  - Audit Security Group Management - Success and Failure
+  - Audit User Account Management - Success and Failure
+  - Audit DPAPI Activity - Success and Failure
+  - Audit Process Creation - Success and Failure
+  - Audit Directory Service Access - Success and Failure (DC's Only)
+  - Audit Directory Service Changes - Success and Failure (DC's Only)
+  - Audit Account Lockout – Success and Failure
+  - Audit Logoff - Success
+  - Audit Logon - Success and Failure
+  - Audit Other Logon/Logoff Events - Success and Failure
+  - Audit Special Logon - Success and Failure
+  - Audit Detailed File Share - Failure
+  - Audit File Share - Success
+  - Audit File System - Success and Failure
+  - Audit Handle Manipulation - Success and Failure
+  - Audit Other Object Access Events - Success and Failure
+  - Audit Registry - Success and Failure
+  - Audit Policy Change - Success and Failure
+  - Audit Authentication Policy Change - Success
+  - Audit Sensitive Privilege Use - Success and Failure
+  - Audit IPsec Driver - Success and Failure
+  - Audit Other System Events - Success and Failure
+  - Audit Security State Change - Success and Failure
+  - Audit Security System Extension - Success and Failure
+  - Audit System Integrity - Success and Failure
+
+- The following logging settings are enforced on all workstations through group policy on the network:
+  - Audit Credential Validation - Success and Failure
+  - Audit Computer Account Management - Success
+  - Audit Other Account Management Events - Success and Failure
+  - Audit Security Group Management - Success and Failure
+  - Audit User Account Management - Success and Failure
+  - Audit Process Creation - Success and Failure
+  - Audit Account Lockout – Success and Failure
+  - Audit Logoff - Success
+  - Audit Logon - Success and Failure
+  - Audit Special Logon - Success and Failure
+  - Audit Policy Change - Success and Failure
+  - Audit Authentication Policy Change - Success
+  - Audit IPsec Driver - Success and Failure
+  - Audit Other System Events - Success and Failure
+  - Audit Security State Change - Success and Failure
+  - Audit Security System Extension - Success and Failure
+  - Audit System Integrity - Success and Failure
+
+## Compliance
+
+The IT department will periodically audit the log configuration of information assets and retention settings for the centralized repository. Any misconfigurations that may be detected will be submitted to and reviewed by the [[COMMITTEE]] to be remediated in a timely manner.
