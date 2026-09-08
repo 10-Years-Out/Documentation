@@ -1,0 +1,35 @@
+---
+title: Virtualization Policy
+policy_id: ISP-013
+---
+
+## Intent
+
+The purpose of this policy is to identify and describe the controls in place to secure and monitor the virtualized environment.
+
+## Scope
+
+This policy applies to all virtualized host hardware and software assets within the information technology environment
+
+## Policy
+
+- All virtual host servers (and the associated virtual machines running on the host) and the management appliance shall be configured according to industry best practice and security hardening standards during implementation. These configurations will be reviewed during proactive monitoring and maintenance processes to ensure they still conform to best practice guidelines. See the following documents in the ISPD for details on the configurations:
+  - VMWare vSphere Virtual Host Setup document
+  - VMware vSphere vCenter Server Appliance Setup document
+  - VMware vSphere Windows new VM's and Template Setup document
+
+- Virtual host servers shall be updated during a set update schedule and maintenance window. See the Patch Management Policy for details.
+
+- Access to the virtual host servers and the management appliance shall be given to designated administrators only.
+  - Local administrator accounts shall be configured on the virtual host servers to access the management interface of the host
+
+- Configuration changes in the virtual environment shall adhere to the bank's Change Management and Project Management Policies.
+
+- Backups of the main branch and DR site host configuration settings shall be performed on a nightly basis and stored in a secure repository on the server.
+
+- The host servers shall be protected by a locked server rack located in the server room and access restricted to authorized personnel only.
+  - Any authorized user or 3rd party vendor shall sign in using the server room/rack sign in sheet.
+
+## Compliance
+
+The IT department will oversee the internal monitoring and audit processes that utilize manual review, periodic scans and/or software to identify any vulnerability of the virtual host servers or management appliance, configuration changes, or unauthorized access to the host servers. This report will be presented to ITSC identifying all vulnerabilities, configuration changes, or unauthorized access. Upon approval from the ITSC, the IT department will oversee the mitigation of any issues found during the review process.

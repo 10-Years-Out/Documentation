@@ -1,0 +1,28 @@
+---
+title: Encryption Policy
+policy_id: ISP-017
+---
+
+## Intent
+
+The purpose of this policy is to identify safeguards in place to protect electronic information from disclosure.
+
+## Scope
+
+This policy applies to any electronically transmitted data traveling across public networks, including but not limited to, VPN connections, routers, and modems.
+
+## Policy
+
+- Any communication with the firewall from outside HSLC network shall be encrypted, either by the use of a VPN (Virtual Private Network) tunnel AES 256 bit or higher, or the use of SSH (Secure Shell).
+
+- Any web services hosting confidential information shall require secure authentication and encryption using AES 256-bit TLS (Transport Layer Security) v1.2 or higher.
+
+- All confidential, proprietary, or privileged information that is encrypted on a host system (server or workstation) should utilize a key length of 2048 bits.
+
+- Approved removable storage devices should be issued by the bank and employ encryption.
+
+- A specific list of encryption methods used will be kept in another technical document.
+
+## Compliance
+
+The ITSC shall verify that all systems are implemented according to this policy. This policy will be updated as encryption standards evolve.

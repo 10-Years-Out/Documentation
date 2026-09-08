@@ -1,0 +1,44 @@
+---
+title: Data Backup Policy
+policy_id: ISP-025
+---
+
+## Intent
+
+The purpose of this policy is to minimize the risk to HSLC information systems due to loss of equipment or data.
+
+## Scope
+
+The policy applies to the backup procedure of all information systems electronic data.
+
+## Policy
+
+- Servers are being replicated to the DR site over a fiber line using Veeam Backup & Replication software starting at 11:00 PM every night.
+  - 28 restore points are kept offsite.
+  - These replicas are ready to start as virtual machines on the DR server.
+  - Transmission of replicas is encrypted using AES-256
+
+- FILESERVER, LASERPRO, APPSERVER-H2, and APPSERVER-H1 are being backed up hourly to the local NAS device.
+  - 275 restore points are kept.
+  - Images contain full server data needed to do a bare metal restore and individual file restore.
+  - Backups are encrypted using AES-256.
+
+- All other virtual servers and the LIQUIDFILES and VCENTER appliances are being backed up daily starting at 6:00 PM to the local NAS device.
+  - 30 restore points are kept.
+  - Images contain full server data needed to do a bare metal restore and individual file restore.
+  - Backups are encrypted using AES-256.
+
+- All other virtual appliances are being backed up weekly on Saturdays to the local NAS device
+  - 8 restore points are kept.
+  - Images contain full server data needed to do a bare metal restore and individual file restore.
+  - Backups are encrypted using AES-256.
+
+- All virtual machines are being backed up to the DR site after the nightly replicas have finished running.
+
+- All local and offsite backups on the NAS devices are stored as immutable backups and cannot be altered (modified or deleted) for 30 days.
+
+- The Microsoft 365 environment data is being backed up daily to a NAS device with immutable backups at the main branch.
+
+## Compliance
+
+See Backup Guidelines in the ISPD for additional information and guidance.

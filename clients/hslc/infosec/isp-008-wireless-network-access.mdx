@@ -1,0 +1,51 @@
+---
+title: Wireless Network and Access Policy
+policy_id: ISP-008
+---
+
+## Intent
+
+The purpose of this policy is to establish a standard to design, implement, and identify safeguards in place to protect against unauthorized internal or external wireless network access.
+
+## Scope
+
+The scope of this policy includes wireless network implementation and access methods.
+
+## Policy
+
+- The ITSC shall establish wireless networks that are purpose driven and follow the principle of least privilege.
+
+- The IT department shall be responsible for diagramming, implementing, securing, monitoring, and maintaining the wireless networks.
+
+- The IT department must have the permission of the ITSC and a written description of the purpose and list expected users before implementing any wireless network.
+
+- The wireless networks shall be monitored by the IT department
+
+- The ITSC shall establish an implementation/ hardening standard for wireless networks based on the purpose.
+  - The networks shall be password protected with a minimum character limit of 12.
+  - The networks shall use a minimum encryption of AES-256 with wpa2-psk.
+  - The wireless networks shall be configured as one network allowing internet only and one network allowing LAN access.
+  - Access by employees on any networks shall abide by the enrollment and exit process.
+  - Refer to the SonicWall Wireless AP ISPD setup doc for details on configuration information.
+
+- Changes to the wireless networks or their supporting infrastructure shall abide by the established change management process.
+
+- Supervisors of the departments that are requesting or granting the access shall be responsible for executing the appropriate enrollment and exit processes and training.
+
+- Management should consider establishing networks for the following purposes including but not limited to:
+  - Corporate network that would allow access to bank LAN, servers and/or applications.
+    - This network shall have the strictest enrollment process.
+  - Internet only network that has full access to the internet as a business device, but does not require any access to the LAN.
+    - This should be separated from the production network using hardware and/or software controls.
+  - Vendor/Auditor network for use by approved providers.
+    - This should be separated from the production network using hardware or software controls.
+  - Guest device network could be provided for bank guests that may be conducting business at the bank and need a stable connection.
+    - This should be separated from the production network using hardware or software controls.
+
+- Hardware and/or software settings and configurations that allow network access shall be reviewed periodically.
+
+- Hardware and/or software shall be in place to inspect and block unauthorized traffic and network activities.
+
+## Compliance
+
+The IT department shall include wireless network access related hardware and/or software in monitoring, alerting, auditing and change management activities in accordance with the following policies: Monitoring & Alerting Policy, Auditing Policy, and Change Management Policy.

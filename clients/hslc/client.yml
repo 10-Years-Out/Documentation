@@ -1,0 +1,14 @@
+slug: hslc
+legal_name: The Home Savings and Loan Company of Kenton, Ohio
+short_name: HSLC
+city: Kenton
+state: OH
+committee: ITSC
+committee_full: IT Steering Committee
+core_provider: CSI
+firewall_vendor: SonicWALL
+hypervisor: VMware vSphere
+backup_software: Veeam
+mdm: Intune
+training_platform: KnowBe4
+maturity_model: CRI Profile
