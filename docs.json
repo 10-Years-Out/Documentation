@@ -3,9 +3,18 @@
   "theme": "mint",
   "name": "CBC Policy Documentation",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#1b6b93",
+    "light": "#4a9fc4",
+    "dark": "#155a7a"
+  },
+  "appearance": {
+    "default": "light"
+  },
+  "background": {
+    "color": {
+      "light": "#F6F1E7",
+      "dark": "#0E2433"
+    }
   },
   "favicon": "/favicon.svg",
   "navigation": {

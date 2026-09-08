@@ -1,0 +1,8 @@
+/* Cream canvas and primary-aligned chrome in light mode. */
+html:not(.dark) #background-color,
+html:not(.dark) #navbar,
+html:not(.dark) #sidebar,
+html:not(.dark) #content-area,
+html:not(.dark) #body-content {
+  background-color: #F6F1E7;
+}
