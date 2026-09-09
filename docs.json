@@ -126,8 +126,8 @@
     ]
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/cbc_logo.svg",
+    "dark": "/logo/cbc_logo-dark.svg"
   },
   "navbar": {
     "links": [
