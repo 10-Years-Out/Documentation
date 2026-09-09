@@ -21,7 +21,7 @@ Bank policy files are flat copies of their templates. They contain their own ful
 
     ./export/export.sh hslc
 
-It reads `docs/clients/<slug>/infosec/isp-*.mdx` in filename order, strips frontmatter, uses each `title` as Word Heading 1, starts each policy on a new page, generates a table of contents, and writes to `dist/<slug>/`. Requires `pandoc` and `python3` on PATH. `dist/` is never committed.
+It reads `clients/<slug>/infosec/isp-*.mdx` in filename order, strips frontmatter, uses each `title` as Word Heading 1, starts each policy on a new page, generates a table of contents, and writes to `dist/<slug>/`. Requires `pandoc` and `python3` on PATH. `dist/` is never committed.
 
 `export/reference/<slug>.docx` supplies the client's logo, footer, page size, margins, and Word styles. The script finds it by slug and runs without one, falling back to Pandoc's default styling.
 

@@ -6,7 +6,7 @@ set -euo pipefail
 
 CLIENT="${1:?usage: ./export/export.sh <client-slug>}"
 
-SRC="docs/clients/$CLIENT/infosec"
+SRC="clients/$CLIENT/infosec"
 REF="export/reference/$CLIENT.docx"
 OUT="dist/$CLIENT"
 TMP="$OUT/combined.md"
