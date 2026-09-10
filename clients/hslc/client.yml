@@ -16,6 +16,7 @@ maturity_model: CRI Profile
 documents:
   infosec:
     title: Information Security Policy
-    version: "5.4"
+    version: "5.5"
     releases:
+      - "5.5 | 2026-09 | ITSC"
       - "5.4 | 2026-02 | ITSC | approved 2026-04-13"

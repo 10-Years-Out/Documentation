@@ -96,7 +96,30 @@ The version belongs to the document, not the policy. HSLC's Information Security
 
 When one change affects several policies, use the identical `history` string in every file. The maintenance table groups rows by exact string match, so identical summaries collapse into one row listing all affected policies. Differing summaries produce separate rows.
 
-If the open release does not yet exist in the client's `client.yml`, say so and let a human add it. Do not create releases.
+## Releases
+
+A release is a bucket. It opens on the first change after a board approval, collects every change made until the board meets again, and closes when a human writes the approval date.
+
+`client.yml` holds one line per release, newest first:
+
+```yaml
+releases:
+  - "5.5 | 2026-09 | ITSC"
+  - "5.4 | 2026-02 | ITSC | approved 2026-04-13"
+```
+
+The approval date is the signal. Present means the release is closed. Absent means it is still open and collecting changes.
+
+Before writing a `history` line, read the newest release in the client's `client.yml`:
+
+- No approval date on it → that release is open. Tag your `history` line with its version.
+- It has an approval date → that release is closed. Add a new entry above it with the next minor version, the current month, and the committee name. No approval date. Then tag your `history` line with that new version.
+
+Never write an approval date. That is a human recording what a board did, and it is the only thing that closes a release.
+
+Never choose a major version bump. Default to the next minor version. If a batch of changes looks significant enough to warrant a major bump, say so and let a human decide.
+
+A release collects as many changes as happen in the cycle, across as many policies as are touched. Several rows in the maintenance table sharing one version is normal and correct.
 
 ## Sections
 
@@ -154,3 +177,19 @@ The markers are MDX comments, so they render as nothing on the site and the cont
 ## Table column widths
 
 Pandoc sizes Word table columns from the relative length of the separator row in the Markdown, not from the content. A table written with `|---|---|` gets equal columns; to weight them, make the dashes proportional to the width each column needs. This is why the tables in 001-maintenance have long separator rows. Do not "tidy" them back to `|---|`.
+
+## Audit
+
+`export/audit.py` checks three things that a diff review misses:
+
+1. A client policy file changed with no `history` line for the open release
+2. A template's text changed with no `template_version` bump
+3. A `[[TOKEN]]` surviving in a client file
+
+It runs on every pull request via `.github/workflows/audit.yml`. Run it yourself with:
+
+    python3 export/audit.py --base origin/main
+
+Without `--base` it only checks tokens, since the other two compare against a git ref.
+
+Every check has a matching rule above. If the audit fails, fix the omission rather than the audit.
