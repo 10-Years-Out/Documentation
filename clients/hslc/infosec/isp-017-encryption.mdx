@@ -1,7 +1,9 @@
 ---
 title: Encryption Policy
 policy_id: ISP-017
-template_version: 1
+template_version: 2
+history:
+  - "5.5 | Added AES-256 encryption requirement for confidential data at rest on removable media"
 ---
 
 ### Intent
@@ -23,6 +25,8 @@ This policy applies to any electronically transmitted data traveling across publ
 - Approved removable storage devices should be issued by the bank and employ encryption.
 
 - A specific list of encryption methods used will be kept in another technical document.
+
+- All confidential data at rest on removable media shall be encrypted using AES-256 with a bank-managed key.
 
 ### Compliance
 
