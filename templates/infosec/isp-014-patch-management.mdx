@@ -2,19 +2,21 @@
 title: Patch Management Policy
 policy_id: ISP-014
 template_version: 1
+changes:
+  - "1 | Initial version from HSLC 5.4"
 ---
 
-## Intent
+### Intent
 
 The purpose of this policy is to establish guidelines for the identification and monitoring of missing patches and/or firmware and to outline the standards for the installation of these patches and/or firmware.
 
-## Scope
+### Scope
 
 This policy applies to all hardware and software assets within the information technology environment and includes workstations, servers, firewalls, routers, switches, internal 3rd party applications, and all other critical systems.
 
-## Policy
+### Policy
 
-### General
+#### General
 
 - Through the risk assessment process, the bank ranks the residual risk from its patch process as low because of the multiple technical and administrative controls that are in place. The bank shall rely on the following processes and controls.
   - Patches and/or firmware updates on servers and critical devices are done after-hours and are actively monitored by staff. After updates and/or firmware are applied, all services, applications and devices are tested for proper functionality.
@@ -22,7 +24,7 @@ This policy applies to all hardware and software assets within the information t
   - Software libraries and configuration files for applications and devices are backed up before patch and/or firmware deployment.
   - All servers and workstations shall be patched in a timely manner as described in the detailed policy sections below.
 
-### Workstations and Servers
+#### Workstations and Servers
 
 - Automated patching software shall be used to check for Windows and third-party updates on a daily basis. Updates shall be deployed to all workstations based on the deployment scheduled of test group and non-test group workstations. Server patches are deployed monthly during a set maintenance schedule as they require after-hours restarts of the servers.
 
@@ -32,7 +34,7 @@ This policy applies to all hardware and software assets within the information t
 
 - Patch severity is determined automatically by the patch management system based on scores from Microsoft and other 3rd party providers. These are installed automatically by the system. Prioritization of critical, emergency or zero-day patches is addressed in the 'Emergency Patches and Firmware Updates' section of this policy.
 
-### Firewalls, Routers, and Switches
+#### Firewalls, Routers, and Switches
 
 - The firewalls shall be reviewed during the bank's proactive monitoring and maintenance processes to determine if new firmware is available for the device. If new firmware is available, release notes are reviewed to ensure the firmware is a stable release and is then applied during a scheduled update time.
 
@@ -42,7 +44,7 @@ This policy applies to all hardware and software assets within the information t
 
 - Patch severity for these devices is determined by the manufacturer. Prioritization of critical, emergency or zero-day patches is addressed in the 'Emergency Patches and Firmware Updates' section of this policy.
 
-### 3rd Party Internal Applications and Other Critical Systems
+#### 3rd Party Internal Applications and Other Critical Systems
 
 - All internal 3rd party applications not covered by the automated patch management system shall be reviewed during the bank's proactive monitoring and maintenance processes for missing patches. Available updates will be monitored by IT department and discussed with the application vendor to determine the expected timeframe for the updates. Any outstanding updates will be actively tracked through the bank's proactive monitoring and maintenance processes until they are able to be applied.
 
@@ -50,7 +52,7 @@ This policy applies to all hardware and software assets within the information t
 
 - Patch severity for these applications and critical systems is determined by the developer and/or service provider. Prioritization of critical, emergency or zero-day patches is addressed in the 'Emergency Patches and Firmware Updates' section of this policy.
 
-### Virtualized Hosts and Appliances
+#### Virtualized Hosts and Appliances
 
 - Virtual host servers shall be reviewed during the bank's proactive monitoring and maintenance processes to determine if updates are available. If updates are available, the IT department shall review release notes to ensure the update is a stable release and then apply the update during a scheduled update window.
 
@@ -60,7 +62,7 @@ This policy applies to all hardware and software assets within the information t
 
 - Patch severity for these devices is determined by the manufacturer and/or service provider. Prioritization of critical, emergency or zero-day patches is addressed in the 'Emergency Patches and Firmware Updates' section of this policy.
 
-### Emergency Patches and Firmware Updates
+#### Emergency Patches and Firmware Updates
 
 - Definition: emergency software/device modifications released out-of-band from device and software manufacturers to address zero-day or significant risk bugs and flaws with the recommendation that the public should deploy the patch immediately and prior to the next routine update; and/or a patch that the bank has identified as immediate and necessary to protecting security or operability of its systems.
 
@@ -68,13 +70,13 @@ This policy applies to all hardware and software assets within the information t
 
 - Upon identifying an emergency patch, the bank shall evaluate the assets affected, the business units affected, users affected, and the data affected. The ISO and the IT department shall then determine the appropriate response for deployment by determining the need for possible test assets and by establishing deployment priorities. The IT department will execute the prescribed process.
 
-### Patch Testing Program
+#### Patch Testing Program
 
 - A test group of workstations, consisting of one workstation from each department, is set to deploy patches on daily basis. These workstations are reviewed for issues daily following patch deployments to ensure all applications function without issues.
 
 - All other workstations outside of the patch test group are set to deploy patches on a daily basis from [[PATCH_DEPLOY_WINDOW]].
   - This schedule will allow patches to be tested for [[PATCH_TEST_DAYS]] days in the test group prior to being rolled out to all other workstations on the domain.
 
-## Compliance
+### Compliance
 
 The IT department will oversee the internal monitoring and audit processes that utilize manual review, periodic scans and automated software to identify any available patches and/or firmware updates. Missing patches and/or firmware updates for all systems will be actively tracked until they can be applied. Status reports on the execution of the patch management process and its effectiveness will be submitted to, reviewed and approved by the [[COMMITTEE]] on a quarterly basis.

@@ -2,17 +2,19 @@
 title: Encryption Policy
 policy_id: ISP-017
 template_version: 1
+changes:
+  - "1 | Initial version from HSLC 5.4"
 ---
 
-## Intent
+### Intent
 
 The purpose of this policy is to identify safeguards in place to protect electronic information from disclosure.
 
-## Scope
+### Scope
 
 This policy applies to any electronically transmitted data traveling across public networks, including but not limited to, VPN connections, routers, and modems.
 
-## Policy
+### Policy
 
 - Any communication with the firewall from outside [[SHORT_NAME]] network shall be encrypted, either by the use of a VPN (Virtual Private Network) tunnel [[VPN_ENCRYPTION]] or higher, or the use of SSH (Secure Shell).
 
@@ -24,6 +26,6 @@ This policy applies to any electronically transmitted data traveling across publ
 
 - A specific list of encryption methods used will be kept in another technical document.
 
-## Compliance
+### Compliance
 
 The [[COMMITTEE]] shall verify that all systems are implemented according to this policy. This policy will be updated as encryption standards evolve.

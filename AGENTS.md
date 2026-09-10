@@ -6,19 +6,38 @@ Bank policy files are flat copies of their templates. They contain their own ful
 
 ## Frontmatter
 
-Every file in `templates/` and `clients/` carries:
+A template file:
 
 ```yaml
 ---
-title: Authentication Policy
-policy_id: ISP-001
-template_version: 1
-history:
-  - "5.5 | Raised the minimum TLS version to 1.3"
+title: Encryption Policy
+policy_id: ISP-017
+template_version: 2
+changes:
+  - "2 | Raised the minimum TLS version to 1.3"
+  - "1 | Initial version from HSLC 5.4"
+page_break: false
 ---
 ```
 
-`policy_id` is omitted on the five non-policy sections (000 through 004). `history` appears only on client files and only once a release has touched them. Templates never carry `history`.
+A client file:
+
+```yaml
+---
+title: Encryption Policy
+policy_id: ISP-017
+template_version: 2
+history:
+  - "5.5 | Raised the minimum TLS version to 1.3"
+page_break: false
+---
+```
+
+`policy_id` is omitted on the five non-policy sections (000 through 004).
+
+`changes` belongs only to templates and `history` only to clients. They are never mixed, and never the same list. `changes` records how a template evolved and is keyed to `template_version`. `history` records which of that client's document releases touched the policy and is keyed to the client's document version. Neither is exported to Word.
+
+`page_break: false` means the section continues on the page above it rather than starting a new one. Default is a page break. Only 001-maintenance and 003-authority carry it.
 
 Release dates and board approvals live in the client's `client.yml`, never in a policy file. Never edit them. Humans only.
 
@@ -26,8 +45,8 @@ Release dates and board approvals live in the client's `client.yml`, never in a 
 
 A plain integer answering one question: is this client's copy current with the template?
 
-- When you change a template, increment its `template_version`.
-- When you propagate a template change to a client file, set the client's `template_version` to match the template's.
+- When you change a template, increment its `template_version` and add a matching `changes` line.
+- When you propagate a template change to a client file, set the client's `template_version` to match the template's and add a `history` line.
 - Never edit a template without incrementing. This is the one rule that, if broken, makes every client silently claim to be current.
 
 Matching numbers mean current. A lower number on the client file means it is behind.
@@ -50,6 +69,17 @@ Never make a template-level change directly in a client's file. That silently di
 5. Add a `history` line to the client file, per the section below.
 6. One pull request per client. Never batch clients into one PR. Never merge a pull request.
 7. Never invent or alter policy language that was not in the template diff.
+
+## Changes lines
+
+Never edit a template without incrementing `template_version` and adding a matching `changes` line.
+
+```yaml
+changes:
+  - "2 | Raised the minimum TLS version to 1.3"
+```
+
+One string: the `template_version` this change produced, a pipe, a short summary. Newest first. This is CBC-internal and never reaches a client document. Git holds the full diff; this list is the skimmable summary of how the template evolved.
 
 ## History lines
 
@@ -100,6 +130,25 @@ Never edit the generated Word file. If the output is wrong, fix the MDX or the r
 
 The export maps Markdown headings to Word styles, so these are not cosmetic:
 
-- `##` for Intent, Scope, Policy, Compliance, and for the named subsections of Roles and Responsibilities → gray bold subhead
-- `###` for subsections inside Policy → red italic subhead
-- Never use `#` in the body. The policy title comes from the frontmatter.
+- `##` → large gray subhead, and the only level besides the title that appears in the table of contents. Used exclusively by the named subsections of Policy Maintenance and Roles and Responsibilities (Questions, Board Approval Date, Board of Directors, IT Steering Committee, Employees). Never use it inside a policy.
+- `###` for Intent, Scope, Policy, Compliance → gray subhead, excluded from the table of contents
+- `####` for subsections inside Policy (General, Password Requirements, Firewall) → red italic subhead
+- Never use `#` in the body. The section title comes from the frontmatter.
+
+## Web-only content
+
+Content that belongs on the site but not in the delivered Word document goes between markers:
+
+```
+{/* web-only:start */}
+## Version History
+
+Explanatory note that a bank board does not need to read.
+{/* web-only:end */}
+```
+
+The markers are MDX comments, so they render as nothing on the site and the content between them displays normally. The export strips the markers and everything between them.
+
+## Table column widths
+
+Pandoc sizes Word table columns from the relative length of the separator row in the Markdown, not from the content. A table written with `|---|---|` gets equal columns; to weight them, make the dashes proportional to the width each column needs. This is why the tables in 001-maintenance have long separator rows. Do not "tidy" them back to `|---|`.

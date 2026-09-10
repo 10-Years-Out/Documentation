@@ -21,14 +21,26 @@ for f in "$SRC"/*.mdx; do
   # section title comes from the frontmatter, not the body
   title=$(awk -F': ' '/^title:/{print $2; exit}' "$f" | sed 's/^"//;s/"$//')
 
-  # every section starts on a new page; the first break also gives the
-  # table of contents a page to itself
-  printf '\n```{=openxml}\n<w:p><w:r><w:br w:type="page"/></w:r></w:p>\n```\n\n' >> "$TMP"
+  # sections with `page_break: false` continue on the page above them.
+  # everything else starts a new page. the first break also gives the
+  # table of contents a page to itself.
+  if ! grep -q '^page_break: *false' "$f"; then
+    printf '\n```{=openxml}\n<w:p><w:r><w:br w:type="page"/></w:r></w:p>\n```\n\n' >> "$TMP"
+  fi
 
   printf '# %s\n\n' "$title" >> "$TMP"
 
-  # body: everything after the closing --- of the frontmatter
-  awk 'BEGIN{n=0} /^---[[:space:]]*$/{n++; next} n>=2' "$f" >> "$TMP"
+  # body: everything after the closing --- of the frontmatter, minus any
+  # block marked web-only, which belongs on the site but not in the
+  # delivered document
+  awk '
+    BEGIN { n = 0; skip = 0 }
+    /^---[[:space:]]*$/ { n++; next }
+    n < 2 { next }
+    /web-only:start/ { skip = 1; next }
+    /web-only:end/   { skip = 0; next }
+    !skip
+  ' "$f" >> "$TMP"
   printf '\n' >> "$TMP"
 done
 
@@ -39,7 +51,7 @@ REF_ARG=()
 pandoc "$TMP" \
   --from=markdown+raw_attribute+pipe_tables \
   "${REF_ARG[@]}" \
-  --toc --toc-depth=1 \
+  --toc --toc-depth=2 \
   -o "$DOC"
 
 # Pandoc writes its own bullet glyphs. Swap them for Word's standard

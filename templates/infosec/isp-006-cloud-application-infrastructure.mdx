@@ -2,19 +2,21 @@
 title: Cloud Application and Infrastructure Policy
 policy_id: ISP-006
 template_version: 1
+changes:
+  - "1 | Initial version from HSLC 5.4"
 ---
 
-## Intent
+### Intent
 
 The purpose of this policy is to identify the controls in place to protect the confidentiality, integrity and availability of [[SHORT_NAME]]'s information systems as they relate to cloud computing environments and services. This policy outlines the best practices and operational procedures for the use of cloud computing services for the processing, sharing, storage, and management of the bank's data.
 
-## Scope
+### Scope
 
 Cloud computing is defined as the use of hosted services, such as data storage, servers, databases, networking, and software over the internet, without any direct, active management by the end user. The scope of this policy includes all cloud computing services, and the users of these services, including employees, service providers, contractors, consultants, vendors, and any other party who provides services to the bank, or interacts with the bank's network and/or information systems. This policy applies to all types of cloud computing environments, including Infrastructure as a Service (IaaS), Platform as a Service (PaaS), and Software as a Service (SaaS).
 
-## Policy
+### Policy
 
-### General
+#### General
 
 - The [[COMMITTEE]] will oversee, and approve, the procurement of cloud computing services. Cloud service provider relationships will be subject to, and managed by, the guidelines set forth in the bank's Service Provider Selection and Management Policy and through the bank's overall risk management program.
 
@@ -22,7 +24,7 @@ Cloud computing is defined as the use of hosted services, such as data storage, 
 
 - The use of cloud computing services must comply with all other provisions of this Information Security Policy, the Acceptable Use Policy, and all of the other existing information security related policies in place for the bank.
 
-### Identity & Access Management
+#### Identity & Access Management
 
 - Access to cloud resources will be granted based on the principle of least privilege, ensuring that users have the minimum access necessary to perform their job functions. Duties will be segregated and restrict access to sensitive data.
 
@@ -30,7 +32,7 @@ Cloud computing is defined as the use of hosted services, such as data storage, 
 
 - Access to cloud services will be monitored, and any unauthorized access or anomalies should be reported to the IT department immediately.
 
-### Risk Management
+#### Risk Management
 
 - Cloud computing is exposed to the same types of threats, vulnerabilities, and risks as other technology environments, whether it is managed internally or at a third party service provider. Although exposed to the same risks, cloud computing may require different security configurations and processes, so it is necessary for the bank to evaluate the risks and potential additional controls in the use of cloud computing services.
 
@@ -44,7 +46,7 @@ Cloud computing is defined as the use of hosted services, such as data storage, 
 
 - Cloud computing threats, vulnerabilities, risks, and controls are addressed extensively in the bank's GLBA IT Risk Assessment.
 
-### Data Protection, Ownership, and Privacy
+#### Data Protection, Ownership, and Privacy
 
 - All sensitive data stored, processed, or transmitted in the cloud shall be encrypted both in transit and at rest using strong encryption algorithms that meet the bank's data protection standards.
 
@@ -56,7 +58,7 @@ Cloud computing is defined as the use of hosted services, such as data storage, 
 
 - Data backup processes, whether internally or at the cloud computing provider, shall be in place for all critical data stored, processed, or transmitted by a cloud computing provider. Backup processes shall be reviewed during periodic reviews of the service providers and during the bank's routine monitoring and maintenance processes.
 
-### Responsibility
+#### Responsibility
 
 - In cloud computing relationships, responsibility will be shared by the bank and the cloud computing service provider.
 
@@ -74,6 +76,6 @@ Cloud computing is defined as the use of hosted services, such as data storage, 
 
 - Employees shall not store or transmit sensitive information using unauthorized cloud services or applications.
 
-## Compliance and Ongoing Monitoring
+### Compliance and Ongoing Monitoring
 
 Ongoing monitoring will take place for all cloud computing service providers in accordance with the bank's Service Provider Management Policy and through its routine monitoring and maintenance processes to detect and respond to security threats, vulnerabilities, and anomalies in cloud environments. Cloud security configurations shall be regularly reviewed and updated to protect against emerging threats, and the bank shall ensure the cloud environments are regularly audited for compliance with internal security policies, regulatory requirements, and industry standards. Any identified vulnerabilities or incidents shall be documented and reported to the [[COMMITTEE]] and remediated in a timely manner.
