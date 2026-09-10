@@ -3,8 +3,8 @@
     python3 export/audit.py                 # tokens only
     python3 export/audit.py --base origin/main   # all three
 
-Checks 1 and 2 compare against a git ref, so they need --base. Check 3
-works on the tree as it stands. Exits non-zero on any failure.
+Checks 1 and 2 compare against a git ref, so they need --base. Checks 3
+and 4 work on the tree as it stands. Exits non-zero on any failure.
 """
 
 import argparse
@@ -93,6 +93,22 @@ def check_template_bump(base):
             fail(path, "template changed with no template_version bump")
 
 
+def check_maintenance():
+    """Every client's maintenance page must match what the generator produces."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        'build_maintenance', REPO / 'export' / 'build-maintenance.py')
+    builder = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(builder)
+
+    for yml in sorted((REPO / 'clients').glob('*/client.yml')):
+        slug = yml.parent.name
+        path, before, after = builder.rebuild(slug)
+        if before != after:
+            fail(path.relative_to(REPO),
+                 f'out of date — run python3 export/build-maintenance.py {slug}')
+
+
 def check_tokens():
     """No [[TOKEN]] should survive instantiation into a client file."""
     for path in sorted((REPO / 'clients').rglob('*.mdx')):
@@ -108,6 +124,7 @@ def main():
     args = parser.parse_args()
 
     check_tokens()
+    check_maintenance()
     if args.base:
         check_history(args.base)
         check_template_bump(args.base)

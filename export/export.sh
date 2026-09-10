@@ -14,6 +14,10 @@ DOC="$OUT/$CLIENT-information-security-policy.docx"
 
 [ -d "$SRC" ] || { echo "no such client: $SRC"; exit 1; }
 
+# the maintenance tables are built from the history lines in the policy
+# files, so refresh them before anything is concatenated
+python3 export/build-maintenance.py "$CLIENT"
+
 mkdir -p "$OUT"
 : > "$TMP"
 

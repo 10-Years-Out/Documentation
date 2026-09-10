@@ -67,8 +67,9 @@ Never make a template-level change directly in a client's file. That silently di
 3. If the client's current text does not match the template's old text, stop. Do not overwrite. Report it as a divergence and leave the file alone.
 4. Set the client's `template_version` to match the template's.
 5. Add a `history` line to the client file, per the section below.
-6. One pull request per client. Never batch clients into one PR. Never merge a pull request.
-7. Never invent or alter policy language that was not in the template diff.
+6. Rebuild the maintenance page: `python3 export/build-maintenance.py <slug>`. Commit the result with your change.
+7. One pull request per client. Never batch clients into one PR. Never merge a pull request.
+8. Never invent or alter policy language that was not in the template diff.
 
 ## Changes lines
 
@@ -178,6 +179,24 @@ The markers are MDX comments, so they render as nothing on the site and the cont
 
 Pandoc sizes Word table columns from the relative length of the separator row in the Markdown, not from the content. A table written with `|---|---|` gets equal columns; to weight them, make the dashes proportional to the width each column needs. This is why the tables in 001-maintenance have long separator rows. Do not "tidy" them back to `|---|`.
 
+## Maintenance tables
+
+`001-maintenance.mdx` is generated, never hand-written.
+
+**After changing any client policy file, run the generator and commit the result with your change:**
+
+    python3 export/build-maintenance.py hslc
+
+This is not optional and it is not a separate task. A policy change that does not update the maintenance page is an incomplete change, and the audit will fail the pull request.
+
+`export.sh` also runs it before every export, so the delivered document is never stale. That is a backstop, not the process — the site should be current the moment the change lands, not months later at delivery.
+
+How it works: it reads every `history` line in the client's policy frontmatter, groups them by release, joins to the releases list in `client.yml` for the date and committee, and rewrites both tables. Within a release there is one row per distinct change; the version, revised-by and date print on the first row only, so the release reads as one block. Identical `history` strings across policies collapse into one row listing every affected policy, which is why the wording must match exactly when one change touches several files.
+
+Rows for any version `client.yml` has never heard of are preserved untouched. That is how the frozen record from the source document survives.
+
+Never hand-edit the tables. Edit the `history` line or the release entry in `client.yml`, then re-run the generator.
+
 ## Audit
 
 `export/audit.py` checks three things that a diff review misses:
@@ -185,11 +204,12 @@ Pandoc sizes Word table columns from the relative length of the separator row in
 1. A client policy file changed with no `history` line for the open release
 2. A template's text changed with no `template_version` bump
 3. A `[[TOKEN]]` surviving in a client file
+4. A maintenance page that no longer matches the history lines behind it
 
 It runs on every pull request via `.github/workflows/audit.yml`. Run it yourself with:
 
     python3 export/audit.py --base origin/main
 
-Without `--base` it only checks tokens, since the other two compare against a git ref.
+Without `--base` it runs checks 3 and 4, since the first two compare against a git ref.
 
 Every check has a matching rule above. If the audit fails, fix the omission rather than the audit.
