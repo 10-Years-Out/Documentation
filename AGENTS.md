@@ -124,6 +124,8 @@ It reads `clients/<slug>/infosec/*.mdx` in filename order, strips frontmatter, u
 
 To onboard a client, copy `export/reference/_template.docx` to `export/reference/<slug>.docx` and replace the picture in the Word page header with that client's logo. Do not change the styles.
 
+`export/fix-docx.py` runs after Pandoc and repairs two things Pandoc gets wrong: its bullet glyphs, and banded table rows, which it writes straight into the cells because Word's conditional table formatting does not apply reliably. Do not move that logic into the reference doc's table style; it was tried and it does not hold in Word.
+
 Never edit the generated Word file. If the output is wrong, fix the MDX or the reference doc. Verify in Word rather than a preview tool — the table of contents is a field that populates on open, and table header shading renders differently elsewhere.
 
 ## Heading levels in policy files

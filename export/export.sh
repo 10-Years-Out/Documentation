@@ -54,35 +54,12 @@ pandoc "$TMP" \
   --toc --toc-depth=2 \
   -o "$DOC"
 
-# Pandoc writes its own bullet glyphs. Swap them for Word's standard
-# filled circle / hollow circle / square so lists match the original.
-python3 - "$DOC" << 'PY'
-import re, shutil, sys, zipfile, tempfile
-
-path = sys.argv[1]
-levels = [('\uf0b7', 'Symbol'), ('o', 'Courier New'), ('\uf0a7', 'Wingdings')]
-
-with zipfile.ZipFile(path) as z:
-    items = {n: z.read(n) for n in z.namelist()}
-
-xml = items['word/numbering.xml'].decode('utf-8')
-block = re.search(r'<w:abstractNum w:abstractNumId="991".*?</w:abstractNum>', xml, re.S)
-if block:
-    new = block.group(0)
-    for i, (char, font) in enumerate(levels):
-        new = re.sub(
-            r'(<w:lvl w:ilvl="%d">.*?<w:numFmt w:val="bullet" ?/>)<w:lvlText w:val="[^"]*" ?/>' % i,
-            r'\1<w:lvlText w:val="%s"/><w:rPr><w:rFonts w:ascii="%s" w:hAnsi="%s" w:hint="default"/></w:rPr>' % (char, font, font),
-            new, count=1, flags=re.S)
-    xml = xml.replace(block.group(0), new)
-    items['word/numbering.xml'] = xml.encode('utf-8')
-
-    tmp = tempfile.mktemp(suffix='.docx')
-    with zipfile.ZipFile(tmp, 'w', zipfile.ZIP_DEFLATED) as z:
-        for n, data in items.items():
-            z.writestr(n, data)
-    shutil.move(tmp, path)
-PY
+# Two things Pandoc gets wrong for this document, repaired in the packed file:
+#   1. its own bullet glyphs, swapped for Word's filled circle / hollow
+#      circle / square
+#   2. banded table rows, written straight into the cells rather than left to
+#      Word's conditional table formatting, which does not reliably apply
+python3 export/fix-docx.py "$DOC"
 
 rm -f "$TMP"
 echo "wrote $DOC"
