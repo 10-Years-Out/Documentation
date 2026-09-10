@@ -6,3 +6,9 @@ html:not(.dark) #content-area,
 html:not(.dark) #body-content {
   background-color: #F8F6F1;
 }
+
+/* Give the CBC wordmark more presence in the top navigation. */
+img.nav-logo {
+  height: 3.5rem !important;
+  width: auto !important;
+}
