@@ -12,3 +12,10 @@ backup_software: Veeam
 mdm: Intune
 training_platform: KnowBe4
 maturity_model: CRI Profile
+
+documents:
+  infosec:
+    title: Information Security Policy
+    version: "5.4"
+    releases:
+      - "5.4 | 2026-02 | ITSC | approved 2026-04-13"

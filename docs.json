@@ -28,6 +28,11 @@
               {
                 "group": "InfoSec",
                 "pages": [
+                  "templates/infosec/000-confidentiality",
+                  "templates/infosec/001-maintenance",
+                  "templates/infosec/002-overview",
+                  "templates/infosec/003-authority",
+                  "templates/infosec/004-roles",
                   "templates/infosec/isp-001-authentication",
                   "templates/infosec/isp-002-iam-authorization",
                   "templates/infosec/isp-003-network-access",
@@ -78,6 +83,11 @@
                   {
                     "group": "InfoSec",
                     "pages": [
+                      "clients/hslc/infosec/000-confidentiality",
+                      "clients/hslc/infosec/001-maintenance",
+                      "clients/hslc/infosec/002-overview",
+                      "clients/hslc/infosec/003-authority",
+                      "clients/hslc/infosec/004-roles",
                       "clients/hslc/infosec/isp-001-authentication",
                       "clients/hslc/infosec/isp-002-iam-authorization",
                       "clients/hslc/infosec/isp-003-network-access",

@@ -17,11 +17,11 @@ DOC="$OUT/$CLIENT-information-security-policy.docx"
 mkdir -p "$OUT"
 : > "$TMP"
 
-for f in "$SRC"/isp-*.mdx; do
-  # policy title comes from the frontmatter, not the body
+for f in "$SRC"/*.mdx; do
+  # section title comes from the frontmatter, not the body
   title=$(awk -F': ' '/^title:/{print $2; exit}' "$f" | sed 's/^"//;s/"$//')
 
-  # every policy starts on a new page; the first break also gives the
+  # every section starts on a new page; the first break also gives the
   # table of contents a page to itself
   printf '\n```{=openxml}\n<w:p><w:r><w:br w:type="page"/></w:r></w:p>\n```\n\n' >> "$TMP"
 
